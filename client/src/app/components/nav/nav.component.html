@@ -48,10 +48,16 @@
                 *ngIf="!authService.isAuthorized()"
                 routerLink="/sign-in">Sign In
         </button>
-        <button type="button" mat-raised-button color="warn"
-                *ngIf="authService.isAuthorized()"
-                (click)="signOut()">Sign Out
+        <button type="button" mat-raised-button color="accent"
+                *ngIf="!authService.isAuthorized()"
+                routerLink="/sign-up">Sign Up
         </button>
+        <div>
+          <button type="button" mat-raised-button color="warn"
+                  *ngIf="authService.isAuthorized()"
+                  (click)="signOut()">Sign Out
+          </button>
+        </div>
       </div>
     </div>
   </nav>

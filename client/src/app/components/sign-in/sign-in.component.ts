@@ -22,8 +22,8 @@ export class SignInComponent {
     });
   }
 
-  login() {
-    this.authService.singIn(this.options.value)
+  signIn() {
+    this.authService.signIn(this.options.value)
       .subscribe((userDetails) => {
         this.router.navigateByUrl('/');
       });

@@ -1,9 +1,18 @@
 import {NgModule} from '@angular/core';
 import {
-  MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatExpansionPanel, MatFormFieldModule, MatInputModule,
-  MatOptionModule, MatPlaceholder,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatOptionModule,
   MatRadioModule,
-  MatSelectModule, MatTableModule, MatTabsModule, MatToolbarModule
+  MatSelectModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule
 } from '@angular/material';
 
 @NgModule({
@@ -19,7 +28,8 @@ import {
     MatTabsModule,
     MatTableModule,
     MatButtonToggleModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDialogModule
   ],
   exports: [
     MatButtonModule,
@@ -33,7 +43,8 @@ import {
     MatTabsModule,
     MatTableModule,
     MatButtonToggleModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDialogModule
   ]
 })
 export class AppMaterialModule {

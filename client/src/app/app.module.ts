@@ -13,6 +13,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {SettingsComponent} from './components/settings/settings.component';
 import {httpInterceptorProviders} from './common/htpp-interceptor';
 import {AuthService} from './common/auth.service';
+import {SignUpComponent} from './components/sign-up/sign-up.component';
+import {InfoModalComponent} from './common/modal/info-modal/info-modal.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import {AuthService} from './common/auth.service';
     HomeComponent,
     SignInComponent,
     NavComponent,
-    SettingsComponent
+    SettingsComponent,
+    SignUpComponent,
+    InfoModalComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +35,9 @@ import {AuthService} from './common/auth.service';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AppRoutesModule
+  ],
+  entryComponents: [
+    InfoModalComponent
   ],
   providers: [
     AuthService,

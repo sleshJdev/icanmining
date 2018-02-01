@@ -1,5 +1,8 @@
 <div class="form-container">
   <form class="form" [formGroup]="options">
+    <div>
+      <h2>Sign In</h2>
+    </div>
     <div class="form__row">
       <mat-form-field>
         <input matInput name="username" formControlName="username">
@@ -21,7 +24,10 @@
     <div class="form__row">
       <mat-toolbar>
         <mat-toolbar-row>
-          <button color="primary" mat-raised-button type="submit" (click)="login()">Login</button>
+          <button type="submit" color="primary" [disabled]="!options.valid"
+                  mat-raised-button (click)="signIn()">
+            Sign In
+          </button>
         </mat-toolbar-row>
       </mat-toolbar>
     </div>

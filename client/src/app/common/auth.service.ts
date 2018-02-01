@@ -42,7 +42,7 @@ export class AuthService implements OnInit {
     localStorage.removeItem(this.tokenHeaderNameKey);
   }
 
-  singIn(credentials) {
+  signIn(credentials) {
     return this.http.post('/api/sign-in', credentials)
       .map((authDetails: any) => {
         this.authDetails = authDetails;
