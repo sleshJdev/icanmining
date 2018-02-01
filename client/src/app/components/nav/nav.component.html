@@ -1,0 +1,58 @@
+<header>
+  <nav class="nav">
+    <div class="brand">
+      <a routerLink="/">
+        <img src="../../../assets/images/miner.jpg">
+        Stakhanov
+      </a>
+    </div>
+    <div class="menu">
+      <div class="menu__item">
+        <button type="button" mat-button
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                routerLink="/">
+          Home
+        </button>
+      </div>
+      <div class="menu__item">
+        <button type="button"
+                mat-button routerLinkActive="active"
+                routerLink="/settings">
+          Settings
+        </button>
+      </div>
+      <div class="menu__item">
+        <button type="button" mat-button
+                routerLinkActive="active"
+                routerLink="/users">
+          Users
+        </button>
+      </div>
+      <div class="menu__item">
+        <button type="button" mat-button
+                routerLinkActive="active"
+                routerLink="/contact">
+          Contact
+        </button>
+      </div>
+      <div class="menu__item">
+        <button type="button" mat-button
+                routerLinkActive="active"
+                routerLink="/about">
+          About
+        </button>
+      </div>
+      <div class="menu__item">
+        <button type="button" mat-raised-button color="primary"
+                *ngIf="!authService.isAuthorized()"
+                routerLink="/sign-in">Sign In
+        </button>
+        <button type="button" mat-raised-button color="warn"
+                *ngIf="authService.isAuthorized()"
+                (click)="signOut()">Sign Out
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>

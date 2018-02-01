@@ -1,0 +1,20 @@
+<div class="panel">
+  <div class="form-container">
+    <form class="form">
+      <div class="form__row">
+        <mat-form-field>
+          <input matInput [value]="bitcoinAddress.address" [disabled]="!editable">
+        </mat-form-field>
+      </div>
+      <div class="form__row form__row--button">
+        <mat-toolbar>
+          <mat-toolbar-row>
+            <mat-button-toggle (change)="editable = $event.source.checked">
+              {{editable ? 'Apply' : 'Edit'}}
+            </mat-button-toggle>
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </div>
+    </form>
+  </div>
+</div>

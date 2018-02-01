@@ -1,0 +1,15 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-container .form {
+  display: inline-block;
+}
+
+.panel {
+  padding: 2em 5em;
+  margin: 1em;
+}

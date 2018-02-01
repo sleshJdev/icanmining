@@ -1,0 +1,19 @@
+mat-form-field {
+  width: 30em;
+}
+
+mat-form-field input {
+  text-align: center;
+}
+
+mat-toolbar {
+  background-color: transparent;
+}
+
+mat-toolbar-row {
+  justify-content: flex-end;
+  padding-right: 0;
+}
+
+
+

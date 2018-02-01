@@ -1,0 +1,48 @@
+header {
+  margin-bottom: 2em;
+}
+
+.nav {
+  margin: 1em 5em;
+}
+
+.nav .brand {
+  display: inline-block;
+  float: left;
+  line-height: 36px;
+  padding-right: 0.5em;
+  border-bottom-right-radius: 1em;
+  border-top-right-radius: 1em;
+  background-color: blue;
+}
+
+.brand a {
+  text-transform: uppercase;
+  color: gold;
+}
+
+.brand img {
+  height: 36px;
+  margin-right: 0.3em;
+  float: left;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.menu__item {
+  margin: 0;
+  padding: 0 1em;
+  text-transform: uppercase;
+}
+
+.menu__item a {
+  text-decoration: none;
+}
+
+.active {
+  background-color: #e0e0e0;
+}
