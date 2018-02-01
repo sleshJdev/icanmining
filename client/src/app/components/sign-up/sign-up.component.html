@@ -1,0 +1,35 @@
+<div class="form-container">
+  <form class="form" [formGroup]="options">
+    <div>
+      <h2>Sign Up</h2>
+    </div>
+    <div class="form__row">
+      <mat-form-field>
+        <input matInput name="username" formControlName="username">
+        <mat-placeholder>Username</mat-placeholder>
+        <mat-error *ngIf="options.controls.username.hasError('required')">
+          Username is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form__row">
+      <mat-form-field>
+        <input matInput type="password" name="password" formControlName="password">
+        <mat-placeholder>Password</mat-placeholder>
+        <mat-error *ngIf="options.controls.password.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form__row">
+      <mat-toolbar>
+        <mat-toolbar-row>
+          <button type="submit" color="accent" [disabled]="options.invalid"
+                  mat-raised-button (click)="signUp()">
+            Create Account
+          </button>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </div>
+  </form>
+</div>
