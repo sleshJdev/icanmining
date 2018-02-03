@@ -11,6 +11,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,14 +37,18 @@ public class AuthController {
     @PostMapping("/sign-in")
     @ResponseBody
     public AuthDetailsDto signIn(@RequestBody Credentials credentials) {
+        ApplicationUser user = applicationUserRepository.findByUsername(credentials.getUsername());
+        if (user == null) {
+             throw new AuthenticationServiceException("User not found");
+        }
         try {
             String token = JWT.create()
-                    .withSubject(credentials.getPassword())
+                    .withSubject(user.getPassword())
                     .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                     .sign(Algorithm.HMAC256(SECRET_KEY));
             return new AuthDetailsDto(
                     new TokenDto(HEADER_STRING, TOKEN_PREFIX + token),
-                    new UserDto(credentials.getUsername()));
+                    new UserDto(user.getUsername()));
         } catch (UnsupportedEncodingException e) {
             throw new AuthenticationServiceException("Cannot authenticate", e);
         }
