@@ -13,14 +13,14 @@ public class UserProfit {
     private Long id;
     @ManyToOne(cascade = CascadeType.ALL)
     private ApplicationUser user;
-    @Column(nullable = false)
+    @Column(updatable = false, nullable = false, precision = 19, scale = 15)
     private BigDecimal profit;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private AlgorithmType algorithmType;
     @Column(updatable = false, nullable = false)
     private LocalDateTime issueDate;
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false, nullable = false, precision = 19, scale = 0)
     private BigDecimal miningInterval;
 
     public UserProfit() {

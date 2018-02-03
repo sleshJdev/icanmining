@@ -2,6 +2,7 @@ package by.miner.mono.security;
 
 import by.miner.mono.persistence.model.ApplicationUser;
 import by.miner.mono.persistence.repository.ApplicationUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,6 +15,7 @@ import static java.util.Collections.emptyList;
 public class SimpleUserDetailsService implements UserDetailsService {
     private ApplicationUserRepository userRepository;
 
+    @Autowired
     public SimpleUserDetailsService(ApplicationUserRepository applicationUserRepository) {
         this.userRepository = applicationUserRepository;
     }

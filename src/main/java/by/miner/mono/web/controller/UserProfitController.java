@@ -5,6 +5,7 @@ import by.miner.mono.persistence.repository.ApplicationUserRepository;
 import by.miner.mono.service.UserProfitService;
 import by.miner.mono.web.dto.UserProfitDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -22,8 +23,9 @@ public class UserProfitController {
     }
 
     @PostMapping
-    public void saveAlgorithmProfit(@RequestBody UserProfitDto userProfitDto, Principal principal) {
-        ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
+    public void saveAlgorithmProfit(@RequestBody UserProfitDto userProfitDto) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        ApplicationUser user = applicationUserRepository.findByUsername(username);
         userProfitService.saveUserProfit(user, userProfitDto);
     }
 }
