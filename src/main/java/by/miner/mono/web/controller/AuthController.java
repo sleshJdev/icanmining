@@ -1,17 +1,15 @@
 package by.miner.mono.web.controller;
 
 import by.miner.mono.persistence.model.ApplicationUser;
-import by.miner.mono.persistence.repository.ApplicationUserRepository;
 import by.miner.mono.security.Credentials;
+import by.miner.mono.service.ApplicationUserService;
 import by.miner.mono.web.dto.AuthDetailsDto;
 import by.miner.mono.web.dto.TokenDto;
 import by.miner.mono.web.dto.UserDto;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,21 +21,20 @@ import static by.miner.mono.security.SecurityConstants.*;
 @RestController
 @RequestMapping("/api")
 public class AuthController {
-
-    private final ApplicationUserRepository applicationUserRepository;
+    private final ApplicationUserService applicationUserService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public AuthController(ApplicationUserRepository applicationUserRepository,
+    public AuthController(ApplicationUserService applicationUserService,
                           BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.applicationUserRepository = applicationUserRepository;
+        this.applicationUserService = applicationUserService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @PostMapping("/sign-in")
     @ResponseBody
     public AuthDetailsDto signIn(@RequestBody Credentials credentials) {
-        ApplicationUser user = applicationUserRepository.findByUsername(credentials.getUsername());
+        ApplicationUser user = applicationUserService.findByUsername(credentials.getUsername());
         if (user == null) {
              throw new AuthenticationServiceException("User not found");
         }
@@ -57,6 +54,6 @@ public class AuthController {
     @PostMapping("/sign-up")
     public void signUp(@RequestBody Credentials credentials) {
         credentials.setPassword(bCryptPasswordEncoder.encode(credentials.getPassword()));
-        applicationUserRepository.save(new ApplicationUser(credentials.getUsername(), credentials.getPassword()));
+        applicationUserService.save(credentials);
     }
 }

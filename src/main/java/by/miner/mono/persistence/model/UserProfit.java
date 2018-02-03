@@ -4,7 +4,7 @@ import by.miner.mono.enums.AlgorithmType;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class UserProfit {
@@ -21,16 +21,16 @@ public class UserProfit {
     @Column(updatable = false, nullable = false)
     private LocalDateTime issueDate;
     @Column(updatable = false, nullable = false)
-    private BigDecimal miningPeriod;
+    private BigDecimal miningInterval;
 
     public UserProfit() {
     }
 
-    public UserProfit(ApplicationUser user, BigDecimal profit, AlgorithmType algorithmType, BigDecimal miningPeriod, LocalDateTime issueDate) {
+    public UserProfit(ApplicationUser user, BigDecimal profit, AlgorithmType algorithmType, BigDecimal miningInterval, LocalDateTime issueDate) {
         this.user = user;
         this.profit = profit;
         this.algorithmType = algorithmType;
-        this.miningPeriod = miningPeriod;
+        this.miningInterval = miningInterval;
         this.issueDate = issueDate;
     }
 
@@ -74,11 +74,11 @@ public class UserProfit {
         this.issueDate = issueDate;
     }
 
-    public BigDecimal getMiningPeriod() {
-        return miningPeriod;
+    public BigDecimal getMiningInterval() {
+        return miningInterval;
     }
 
-    public void setMiningPeriod(BigDecimal miningPeriod) {
-        this.miningPeriod = miningPeriod;
+    public void setMiningInterval(BigDecimal miningInterval) {
+        this.miningInterval = miningInterval;
     }
 }

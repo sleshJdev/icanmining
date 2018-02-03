@@ -5,16 +5,16 @@ import by.miner.mono.enums.AlgorithmType;
 import java.math.BigDecimal;
 
 public final class UserProfitDto {
-    private BigDecimal miningPeriod;
+    private BigDecimal miningInterval;
     private AlgorithmType algorithmType;
     private BigDecimal profit;
 
-    public BigDecimal getMiningPeriod() {
-        return miningPeriod;
+    public BigDecimal getMiningInterval() {
+        return miningInterval;
     }
 
-    public void setMiningPeriod(BigDecimal miningPeriod) {
-        this.miningPeriod = miningPeriod;
+    public void setMiningInterval(BigDecimal miningInterval) {
+        this.miningInterval = miningInterval;
     }
 
     public AlgorithmType getAlgorithmType() {
