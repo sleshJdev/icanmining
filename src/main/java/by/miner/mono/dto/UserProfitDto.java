@@ -1,12 +1,9 @@
-package by.miner.mono.web.dto;
-
-import by.miner.mono.enums.AlgorithmType;
+package by.miner.mono.dto;
 
 import java.math.BigDecimal;
 
 public final class UserProfitDto {
     private BigDecimal miningInterval;
-    private AlgorithmType algorithmType;
     private BigDecimal profit;
 
     public BigDecimal getMiningInterval() {
@@ -15,14 +12,6 @@ public final class UserProfitDto {
 
     public void setMiningInterval(BigDecimal miningInterval) {
         this.miningInterval = miningInterval;
-    }
-
-    public AlgorithmType getAlgorithmType() {
-        return algorithmType;
-    }
-
-    public void setAlgorithmType(AlgorithmType algorithmType) {
-        this.algorithmType = algorithmType;
     }
 
     public BigDecimal getProfit() {

@@ -6,10 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 @Entity
 public class Wallet {
-
     @Id
     @GeneratedValue
     private Long id;
@@ -17,6 +17,9 @@ public class Wallet {
     @NaturalId
     @Column(nullable = false, length = 34)
     private String address;
+
+    @Column(nullable = false, precision = 19, scale = 15)
+    private BigDecimal balance;
 
     public Long getId() {
         return id;
@@ -32,5 +35,13 @@ public class Wallet {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 }

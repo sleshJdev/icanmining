@@ -1,11 +1,23 @@
 package by.miner.mono.persistence.model;
 
-import by.miner.mono.enums.AlgorithmType;
+import by.miner.mono.dto.UserProfitItemInfoDto;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@SqlResultSetMapping(
+        name = "by.miner.mono.dto.UserProfitItemInfoDto",
+        classes = @ConstructorResult(
+                targetClass = UserProfitItemInfoDto.class,
+                columns = {
+                        @ColumnResult(name = "id", type = Long.class),
+                        @ColumnResult(name = "username", type = String.class),
+                        @ColumnResult(name = "profit", type = BigDecimal.class),
+                        @ColumnResult(name = "active", type = Boolean.class)
+                }
+        )
+)
 @Entity
 public class UserProfit {
     @Id
@@ -15,9 +27,6 @@ public class UserProfit {
     private ApplicationUser user;
     @Column(updatable = false, nullable = false, precision = 19, scale = 15)
     private BigDecimal profit;
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private AlgorithmType algorithmType;
     @Column(updatable = false, nullable = false)
     private LocalDateTime issueDate;
     @Column(updatable = false, nullable = false, precision = 19, scale = 0)
@@ -26,10 +35,9 @@ public class UserProfit {
     public UserProfit() {
     }
 
-    public UserProfit(ApplicationUser user, BigDecimal profit, AlgorithmType algorithmType, BigDecimal miningInterval, LocalDateTime issueDate) {
+    public UserProfit(ApplicationUser user, BigDecimal profit, BigDecimal miningInterval, LocalDateTime issueDate) {
         this.user = user;
         this.profit = profit;
-        this.algorithmType = algorithmType;
         this.miningInterval = miningInterval;
         this.issueDate = issueDate;
     }
@@ -56,14 +64,6 @@ public class UserProfit {
 
     public void setProfit(BigDecimal profit) {
         this.profit = profit;
-    }
-
-    public AlgorithmType getAlgorithmType() {
-        return algorithmType;
-    }
-
-    public void setAlgorithmType(AlgorithmType algorithmType) {
-        this.algorithmType = algorithmType;
     }
 
     public LocalDateTime getIssueDate() {

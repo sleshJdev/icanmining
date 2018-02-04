@@ -7,9 +7,8 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-
-  bitcoinAddress = {};
-  editable = false;
+  protected bitcoinAddress = {address: ''};
+  protected editable = false;
 
   constructor(private http: HttpClient) {
   }
@@ -18,9 +17,4 @@ export class SettingsComponent implements OnInit {
     this.http.get<{ address: string }>('/api/wallet')
       .subscribe(response => this.bitcoinAddress = response);
   }
-
-  change() {
-    console.log(JSON.stringify(arguments));
-  }
-
 }

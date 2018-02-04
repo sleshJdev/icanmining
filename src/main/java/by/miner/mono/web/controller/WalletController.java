@@ -2,13 +2,12 @@ package by.miner.mono.web.controller;
 
 import by.miner.mono.persistence.model.Wallet;
 import by.miner.mono.persistence.repository.WalletRepository;
-import by.miner.mono.web.dto.WalletDto;
-import by.miner.mono.web.dto.LoginDto;
+import by.miner.mono.dto.WalletDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/wallet")
 public class WalletController {
 
     private final WalletRepository walletRepository;
@@ -18,7 +17,7 @@ public class WalletController {
         this.walletRepository = walletRepository;
     }
 
-    @GetMapping("/wallet")
+    @GetMapping
     public WalletDto getBitcoinAddress() {
         Iterable<Wallet> addresses = walletRepository.findAll();
         Wallet address = addresses.iterator().next();

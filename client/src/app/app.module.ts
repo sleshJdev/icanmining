@@ -15,6 +15,7 @@ import {httpInterceptorProviders} from './common/htpp-interceptor';
 import {AuthService} from './common/auth.service';
 import {SignUpComponent} from './components/sign-up/sign-up.component';
 import {InfoModalComponent} from './common/modal/info-modal/info-modal.component';
+import { UsersComponent } from './components/users/users.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {InfoModalComponent} from './common/modal/info-modal/info-modal.component
     NavComponent,
     SettingsComponent,
     SignUpComponent,
-    InfoModalComponent
+    InfoModalComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

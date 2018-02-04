@@ -1,16 +1,19 @@
 package by.miner.mono.service;
 
+import by.miner.mono.dto.UserProfitDto;
+import by.miner.mono.dto.UserProfitItemInfoDto;
 import by.miner.mono.persistence.model.ApplicationUser;
 import by.miner.mono.persistence.model.UserProfit;
 import by.miner.mono.persistence.repository.ApplicationUserRepository;
 import by.miner.mono.persistence.repository.UserProfitRepository;
-import by.miner.mono.web.dto.UserProfitDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.Collection;
 
 @Service
 public class UserProfitService {
@@ -28,9 +31,13 @@ public class UserProfitService {
         userProfitRepository.save(new UserProfit(
                 applicationUserRepository.findOne(user.getId()),
                 userProfitDto.getProfit(),
-                userProfitDto.getAlgorithmType(),
                 userProfitDto.getMiningInterval(),
-                OffsetDateTime.now(ZoneId.of("UTC")).toLocalDateTime()
+                OffsetDateTime.now(ZoneOffset.UTC).toLocalDateTime()
         ));
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<UserProfitItemInfoDto> calculateProfit(LocalDateTime from, LocalDateTime to) {
+        return userProfitRepository.calculateProfit(from, to);
     }
 }

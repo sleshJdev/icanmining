@@ -1,4 +1,4 @@
-package by.miner.mono.web.dto;
+package by.miner.mono.dto;
 
 public final class UserDto {
     private final String username;
