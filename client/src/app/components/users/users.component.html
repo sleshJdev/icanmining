@@ -1,0 +1,29 @@
+<div class="users-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort matSortActive="profit" matSortStart="desc" matSortDisableClear>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <mat-header-cell *matHeaderCellDef mat-sort-header="username"> User Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="profit">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Profit, BTC </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.profit}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="active">
+      <mat-header-cell *matHeaderCellDef mat-sort-header="active"> Status </mat-header-cell>
+      <mat-cell *matCellDef="let element"><div [class]="element.active ? 'active' : 'inactive'"></div> </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>
+</div>

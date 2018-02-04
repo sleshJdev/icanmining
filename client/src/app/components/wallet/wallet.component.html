@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-title>
+    Wallet Details
+  </mat-card-title>
+  <mat-card-subtitle>
+    <div class="wallet-balance">
+      <div class="wallet-icon"></div>
+      <div class="wallet-amount">
+        <div><sub>{{wallet.balance}}&nbsp;BTC</sub></div>
+        <div><sub>{{wallet.balance}}&nbsp;USD</sub></div>
+      </div>
+    </div>
+  </mat-card-subtitle>
+  <mat-card-content>
+    <button type="button" mat-raised-button color="primary">
+      <a href="https://www.nicehash.com/wallet" class="button wallet">Nicehash Wallet</a>
+    </button>
+  </mat-card-content>
+  <mat-card-footer>
+    <p><b>Your BTC address</b></p>
+    <p>{{wallet.address}}</p>
+  </mat-card-footer>
+</mat-card>

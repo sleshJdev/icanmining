@@ -12,16 +12,16 @@ public interface UserProfitRepositoryCustom {
             "           (SELECT count(*) > 0 " +
             "           FROM user_profit " +
             "           WHERE user_profit.user_id = t1.user_id " +
-            "           AND issue_date > utc_timestamp - INTERVAL 5 SECOND) active " +
+            "           AND issue_date > utc_timestamp - INTERVAL 1 MINUTE) active " +
             "FROM " +
             "  (SELECT user_id, " +
             "          username, " +
-            "          SUM(profit * mining_interval) user_profit " +
+            "          SUM(profit) user_profit " +
             "   FROM user_profit " +
             "   INNER JOIN application_user a ON user_profit.user_id = a.id " +
-            "   WHERE :from < :to " +
+            "   WHERE issue_date BETWEEN :from AND :to " +
             "   GROUP BY user_id) AS t1, " +
-            "  (SELECT SUM(profit * mining_interval) total_profit " +
+            "  (SELECT SUM(profit) total_profit " +
             "   FROM user_profit) AS t2, " +
             "  (SELECT balance " +
             "   FROM wallet " +

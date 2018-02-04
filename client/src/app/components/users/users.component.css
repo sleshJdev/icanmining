@@ -1,0 +1,30 @@
+.users-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 800px;
+  min-width: 300px;
+  margin-right: 20%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 800px;
+}
+
+.mat-header-cell.mat-sort-header-sorted {
+  color: black;
+}
+
+.active, .inactive {
+  padding: 1em 2em;
+  border-radius: 15em;
+  display: inline-block;
+}
+
+.active {
+  background-color: #00A000;
+}
+
+.inactive {
+  background-color: red;
+}

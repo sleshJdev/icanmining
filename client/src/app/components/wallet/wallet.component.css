@@ -1,0 +1,35 @@
+.wallet-balance {
+  display: flex;
+  align-items: center;
+}
+
+.wallet-icon {
+  display: inline-block;
+  width: 45px;
+  height: 62px;
+  background: url('../../../assets/icons.svg') -124px -211px / 600px 600px no-repeat rgb(255, 255, 255);
+  background-position: -124px -211px;
+}
+
+.wallet-amount {
+  padding-left: 1em;
+}
+
+.mat-card-content button {
+  width: 100%;
+}
+
+.mat-card-content button a {
+  color: #eeeeee;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.mat-card-title {
+  text-align: center;
+}
+
+.mat-card-footer {
+  text-align: center;
+}
