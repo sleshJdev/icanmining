@@ -13,11 +13,9 @@ public class Wallet {
     @Id
     @GeneratedValue
     private Long id;
-
     @NaturalId
     @Column(nullable = false, length = 34)
     private String address;
-
     @Column(nullable = false, precision = 19, scale = 15)
     private BigDecimal balance;
 

@@ -16,6 +16,7 @@ import {AuthService} from './common/auth.service';
 import {SignUpComponent} from './components/sign-up/sign-up.component';
 import {InfoModalComponent} from './common/modal/info-modal/info-modal.component';
 import { UsersComponent } from './components/users/users.component';
+import { WalletComponent } from './components/wallet/wallet.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { UsersComponent } from './components/users/users.component';
     SettingsComponent,
     SignUpComponent,
     InfoModalComponent,
-    UsersComponent
+    UsersComponent,
+    WalletComponent
   ],
   imports: [
     BrowserModule,
