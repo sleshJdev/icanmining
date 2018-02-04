@@ -19,7 +19,7 @@ public interface UserProfitRepositoryCustom {
             "          SUM(profit) user_profit " +
             "   FROM user_profit " +
             "   INNER JOIN application_user a ON user_profit.user_id = a.id " +
-            "   WHERE issue_date BETWEEN :from AND :to " +
+            "   WHERE issue_date >= :from AND :from <= :to " +
             "   GROUP BY user_id) AS t1, " +
             "  (SELECT SUM(profit) total_profit " +
             "   FROM user_profit) AS t2, " +
