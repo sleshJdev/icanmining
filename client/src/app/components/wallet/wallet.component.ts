@@ -10,7 +10,7 @@ import {Subscription} from "rxjs/Subscription";
 })
 export class WalletComponent implements OnInit {
   protected pullingSubscription: Subscription;
-  protected wallet: Wallet;
+  protected wallet: Wallet = new Wallet();
 
   constructor(private http: HttpClient) {
   }

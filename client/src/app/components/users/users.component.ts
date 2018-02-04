@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
 import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-users',
@@ -11,6 +12,7 @@ import {Subscription} from "rxjs/Subscription";
 })
 export class UsersComponent implements OnInit {
   protected pullingSubscription: Subscription;
+  protected intervalColor = new FormControl('month');
   protected displayedColumns = ['id', 'username', 'profit', 'active'];
   protected dataSource = new MatTableDataSource<UserProfitInfo>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -19,10 +21,16 @@ export class UsersComponent implements OnInit {
   constructor(private http: HttpClient) {
   }
 
+  update() {
+    this.pull().subscribe((response: UserProfitInfo[]) => {
+      this.dataSource.data = response;
+    });
+  }
+
   private pull() {
     return this.http.get('/api/profit', {
       params: {
-        interval: 'month'
+        interval: this.intervalColor.value
       }
     })
   }
@@ -34,9 +42,6 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pull().subscribe((response: UserProfitInfo[]) => {
-      this.dataSource.data = response;
-    });
     this.pullingSubscription = Observable
       .interval(30000)
       .switchMap(() => this.pull())

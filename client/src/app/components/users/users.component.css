@@ -6,6 +6,11 @@
   margin-right: 20%;
 }
 
+.mat-form-field {
+  width: 30%;
+  margin: 1em auto;
+}
+
 .mat-table {
   overflow: auto;
   max-height: 800px;
