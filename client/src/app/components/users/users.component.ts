@@ -42,6 +42,7 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.update();
     this.pullingSubscription = Observable
       .interval(30000)
       .switchMap(() => this.pull())
