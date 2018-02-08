@@ -38,6 +38,11 @@ public class UserProfitService {
 
     @Transactional(readOnly = true)
     public Collection<UserProfitItemInfoDto> calculateProfit(LocalDateTime from, LocalDateTime to) {
-        return userProfitRepository.calculateProfit(from, to);
+        return userProfitRepository.calculateUsersProfit(from, to);
+    }
+
+    @Transactional(readOnly = true)
+    public UserProfitItemInfoDto calculateProfit(long id) {
+        return userProfitRepository.calculateUserProfit(id);
     }
 }

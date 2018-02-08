@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MatIconRegistry} from "@angular/material";
+import {AuthService} from "./common/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,7 @@ import {MatIconRegistry} from "@angular/material";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private matIconRegistry: MatIconRegistry) {
+  constructor(protected authService: AuthService) {
   }
 
   ngOnInit(): void {

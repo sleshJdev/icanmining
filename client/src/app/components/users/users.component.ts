@@ -4,6 +4,7 @@ import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
 import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
 import {FormControl} from "@angular/forms";
+import {UserProfitInfo} from "../../model/user-profit-info.";
 
 @Component({
   selector: 'app-users',
@@ -28,7 +29,7 @@ export class UsersComponent implements OnInit {
   }
 
   private pull() {
-    return this.http.get('/api/profit', {
+    return this.http.get('/api/profit/users', {
       params: {
         interval: this.intervalColor.value
       }
@@ -55,11 +56,4 @@ export class UsersComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-}
-
-export interface UserProfitInfo {
-  id: number;
-  username: string;
-  profit: number;
-  active: boolean;
 }

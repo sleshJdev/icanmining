@@ -6,6 +6,9 @@
         Stakhanov
       </a>
     </div>
+    <div class="user" *ngIf="authService.isAuthorized()">
+      Welcome, {{authService.user.username}}!
+    </div>
     <div class="menu">
       <div class="menu__item">
         <button type="button" mat-button
@@ -15,18 +18,18 @@
           Home
         </button>
       </div>
-      <div class="menu__item">
+      <div class="menu__item" *ngIf="false">
         <button type="button"
                 mat-button routerLinkActive="active"
                 routerLink="/settings">
           Settings
         </button>
       </div>
-      <div class="menu__item">
+      <div class="menu__item" *ngIf="authService.isAdmin()">
         <button type="button" mat-button
                 routerLinkActive="active"
                 routerLink="/users">
-          Users
+          Users Profit
         </button>
       </div>
       <div class="menu__item">

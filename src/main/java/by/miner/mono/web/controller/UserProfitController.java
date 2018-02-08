@@ -7,6 +7,7 @@ import by.miner.mono.service.UserProfitService;
 import by.miner.mono.dto.UserProfitDto;
 import by.miner.mono.dto.UserProfitItemInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -27,13 +28,20 @@ public class UserProfitController {
         this.applicationUserRepository = applicationUserRepository;
     }
 
+    @GetMapping("/user")
+    public UserProfitItemInfoDto getUserProfit(Principal principal) {
+        ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
+        return userProfitService.calculateProfit(user.getId());
+    }
+
     @PostMapping
     public void saveUserProfit(@RequestBody UserProfitDto userProfitDto, Principal principal) {
         ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
         userProfitService.saveUserProfit(user, userProfitDto);
     }
 
-    @GetMapping
+    @GetMapping("/users")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Collection<UserProfitItemInfoDto> getProfitInfo(@RequestParam ProfitInterval interval) {
         LocalDateTime now = ZonedDateTime.now(ZoneOffset.UTC).toLocalDateTime();
         LocalDateTime from = interval == ProfitInterval.year

@@ -29,7 +29,7 @@ export class AuthService implements OnInit {
     return this.isAuthorized() ? this.authDetails.token : {};
   }
 
-  get user(): { username: string } {
+  get user(): { username: string, roles: string[] } {
     return this.isAuthorized() ? this.authDetails.user : {};
   }
 
@@ -37,9 +37,24 @@ export class AuthService implements OnInit {
     return !!this.authInfo;
   }
 
+  isAdmin() {
+    return this.hasRole('ROLE_ADMIN');
+  }
+
+  isUser() {
+    return this.hasRole('ROLE_USER');
+  }
+
+  hasRole(role: string) {
+    return this.isAuthorized() && this.user.roles &&
+      this.user.roles.includes(role);
+  }
+
   signOut() {
     this.authDetails = null;
+    const tokenHeaderName = localStorage.getItem(this.tokenHeaderNameKey);
     localStorage.removeItem(this.tokenHeaderNameKey);
+    localStorage.removeItem(tokenHeaderName);
   }
 
   signIn(credentials) {
@@ -58,3 +73,4 @@ export class AuthService implements OnInit {
   }
 
 }
+

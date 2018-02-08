@@ -1,9 +1,7 @@
 package by.miner.mono.persistence.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class ApplicationUser {
@@ -14,13 +12,15 @@ public class ApplicationUser {
     private String username;
     @Column(nullable = false)
     private String password;
-
+    @ManyToMany
+    private List<Role> roles;
     public ApplicationUser() {
     }
 
-    public ApplicationUser(String username, String password) {
+    public ApplicationUser(String username, String password, List<Role> roles) {
         this.username = username;
         this.password = password;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -45,5 +45,13 @@ public class ApplicationUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }

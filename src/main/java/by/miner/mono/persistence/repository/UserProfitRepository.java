@@ -8,5 +8,5 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface UserProfitRepository extends CrudRepository<UserProfit, Long>, UserProfitRepositoryCustom {
-    List<UserProfitItemInfoDto> calculateProfit(LocalDateTime from, LocalDateTime to);
+    List<UserProfitItemInfoDto> calculateUsersProfit(LocalDateTime from, LocalDateTime to);
 }

@@ -1,10 +1,8 @@
-<mat-card>
+<mat-card *ngIf="authService.isUser()">
   <mat-card-title>
-    Download Stakhanov Miner
+    <h3>Your profit</h3>
   </mat-card-title>
   <mat-card-content>
-    <button type="button" mat-raised-button color="primary">
-      <a href="../../../assets/StakhanovMiner.zip">Download</a>
-    </button>
+    <h2><strong>{{userProfitInfo.profit}}</strong>BTC</h2>
   </mat-card-content>
 </mat-card>

@@ -17,6 +17,7 @@ import {SignUpComponent} from './components/sign-up/sign-up.component';
 import {InfoModalComponent} from './common/modal/info-modal/info-modal.component';
 import { UsersComponent } from './components/users/users.component';
 import { WalletComponent } from './components/wallet/wallet.component';
+import { DownloadComponent } from './components/download/download.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { WalletComponent } from './components/wallet/wallet.component';
     SignUpComponent,
     InfoModalComponent,
     UsersComponent,
-    WalletComponent
+    WalletComponent,
+    DownloadComponent
   ],
   imports: [
     BrowserModule,

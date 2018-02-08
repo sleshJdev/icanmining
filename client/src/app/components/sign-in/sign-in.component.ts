@@ -3,6 +3,8 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../common/auth.service';
+import {MatDialog} from "@angular/material";
+import {InfoModalComponent} from "../../common/modal/info-modal/info-modal.component";
 
 @Component({
   selector: 'app-sign-in',
@@ -15,6 +17,7 @@ export class SignInComponent {
 
   constructor(private authService: AuthService,
               private router: Router,
+              private dialog: MatDialog,
               private formBuilder: FormBuilder) {
     this.options = formBuilder.group({
       username: new FormControl('', [Validators.required]),
@@ -26,6 +29,14 @@ export class SignInComponent {
     this.authService.signIn(this.options.value)
       .subscribe((userDetails) => {
         this.router.navigateByUrl('/');
+      }, error => {
+        return this.dialog.open(InfoModalComponent, {
+          width: '300px',
+          data: {
+            title: 'Bad credentials',
+            message: `Username or password are incorrect`
+          }
+        }).afterClosed();
       });
   }
 }

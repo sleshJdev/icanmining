@@ -16,10 +16,18 @@ public class UserProfitRepositoryImpl implements UserProfitRepositoryCustom {
     private EntityManager em;
 
     @SuppressWarnings("unchecked")
-    public List<UserProfitItemInfoDto> calculateProfit(LocalDateTime from, LocalDateTime to) {
-        return em.createNativeQuery(CALCULATE_PROFIT_QUERY, "by.miner.mono.dto.UserProfitItemInfoDto")
+    public List<UserProfitItemInfoDto> calculateUsersProfit(LocalDateTime from, LocalDateTime to) {
+        return em.createNativeQuery(CALCULATE_USERS_PROFIT_QUERY, "by.miner.mono.dto.UserProfitItemInfoDto")
                 .setParameter("from", Date.from(from.toInstant(ZoneOffset.UTC)), TemporalType.TIMESTAMP)
                 .setParameter("to", Date.from(to.toInstant(ZoneOffset.UTC)), TemporalType.TIMESTAMP)
                 .getResultList();
     }
+
+    @Override
+    public UserProfitItemInfoDto calculateUserProfit(long id) {
+        return (UserProfitItemInfoDto) em.createNativeQuery(CALCULATE_USER_PROFIT_QUERY, "by.miner.mono.dto.UserProfitItemInfoDto")
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
 }
