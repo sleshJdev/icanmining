@@ -1,5 +1,5 @@
 <div class="users-container mat-elevation-z8">
-  <mat-form-field>
+  <mat-form-field *ngIf="false">
     <mat-select placeholder="Please, choose a interval" [formControl]="intervalColor" (change)="update()">
       <mat-option value="day">Day</mat-option>
       <mat-option value="month">Month</mat-option>
