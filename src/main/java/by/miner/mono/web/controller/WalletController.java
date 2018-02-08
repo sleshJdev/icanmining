@@ -13,15 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class WalletController {
     private final WalletService walletService;
 
-    @Autowired
     public WalletController(WalletService walletService) {
         this.walletService = walletService;
     }
 
     @GetMapping("/address")
     public String getWalletAddress() {
-        WalletDto wallet = walletService.findWallet();
-        return wallet.getAddress();
+        return walletService.findWalletAddress();
     }
 
     @GetMapping

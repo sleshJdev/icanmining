@@ -41,4 +41,5 @@ export class WalletComponent implements OnInit {
 export class Wallet {
   address: string;
   balance: number;
+  usdAmount: number;
 }
