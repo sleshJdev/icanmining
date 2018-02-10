@@ -16,9 +16,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get(`/api/profit/user`)
-      .subscribe((response: UserProfitInfo) => {
-        this.userProfitInfo = response;
-      });
+    if (this.authService.isAuthorized()) {
+      this.http.get(`/api/profit/user`)
+        .subscribe((response: UserProfitInfo) => {
+          this.userProfitInfo = response;
+        });
+    }
   }
 }
