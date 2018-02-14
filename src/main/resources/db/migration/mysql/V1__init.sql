@@ -46,7 +46,7 @@ CREATE TABLE `wallet` (
   `balance` decimal(19,15) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_wallet_address` (`address`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 INSERT INTO monominer.wallet (id, address, balance) VALUES (1, '3J85FLJrjyqz8Dsj5F9pJ9kkQkqJsByt15', 0);
 INSERT INTO monominer.role (id, name) VALUES (1, 'ROLE_ADMIN');
