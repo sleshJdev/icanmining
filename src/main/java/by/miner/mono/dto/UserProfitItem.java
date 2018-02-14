@@ -3,26 +3,26 @@ package by.miner.mono.dto;
 import java.math.BigDecimal;
 
 public class UserProfitItem {
-    private Long id;
+    private long id;
     private String username;
     private BigDecimal profit;
-    private Boolean active;
+    private boolean active;
 
     public UserProfitItem() {
     }
 
-    public UserProfitItem(Long id, String username, BigDecimal profit, boolean active) {
+    public UserProfitItem(long id, String username, BigDecimal profit, boolean active) {
         this.id = id;
         this.username = username;
         this.profit = profit;
         this.active = active;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -42,11 +42,11 @@ public class UserProfitItem {
         this.profit = profit;
     }
 
-    public Boolean isActive() {
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 }
