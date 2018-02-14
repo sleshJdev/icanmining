@@ -1,11 +1,4 @@
 <div class="users-container mat-elevation-z8">
-  <mat-form-field *ngIf="false">
-    <mat-select placeholder="Please, choose a interval" [formControl]="intervalColor" (change)="update()">
-      <mat-option value="day">Day</mat-option>
-      <mat-option value="month">Month</mat-option>
-      <mat-option value="year">Year</mat-option>
-    </mat-select>
-  </mat-form-field>
   <mat-table #table [dataSource]="dataSource" matSort matSortActive="profit" matSortStart="desc" matSortDisableClear>
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>

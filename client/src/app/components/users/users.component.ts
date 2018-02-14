@@ -1,19 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
-import {Observable} from "rxjs/Observable";
-import {Subscription} from "rxjs/Subscription";
-import {FormControl} from "@angular/forms";
-import {UserProfitInfo} from "../../model/user-profit-info.";
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
+import {UserProfitInfo} from '../../model/user-profit-info.';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy, AfterViewInit {
   protected pullingSubscription: Subscription;
-  protected intervalColor = new FormControl('month');
   protected displayedColumns = ['id', 'username', 'profit', 'active'];
   protected dataSource = new MatTableDataSource<UserProfitInfo>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -29,11 +27,7 @@ export class UsersComponent implements OnInit {
   }
 
   private pull() {
-    return this.http.get('/api/profit/users', {
-      params: {
-        interval: this.intervalColor.value
-      }
-    })
+    return this.http.get('/api/profit/users');
   }
 
   ngOnDestroy() {

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Collection;
@@ -37,8 +36,8 @@ public class UserProfitService {
     }
 
     @Transactional(readOnly = true)
-    public Collection<UserProfitItemInfoDto> calculateProfit(LocalDateTime from, LocalDateTime to) {
-        return userProfitRepository.calculateUsersProfit(from, to);
+    public Collection<UserProfitItemInfoDto> calculateProfit() {
+        return userProfitRepository.calculateUsersProfit();
     }
 
     @Transactional(readOnly = true)

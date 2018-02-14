@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 )
 @Entity
 public class UserProfit {
+    public static final String USER_PROFIT_MAPPING_NAME = "by.miner.mono.dto.UserProfitItemInfoDto";
     @Id
     @GeneratedValue
     private Long id;

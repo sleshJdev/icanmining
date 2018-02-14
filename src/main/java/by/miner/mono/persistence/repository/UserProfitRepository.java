@@ -4,9 +4,8 @@ import by.miner.mono.dto.UserProfitItemInfoDto;
 import by.miner.mono.persistence.model.UserProfit;
 import org.springframework.data.repository.CrudRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface UserProfitRepository extends CrudRepository<UserProfit, Long>, UserProfitRepositoryCustom {
-    List<UserProfitItemInfoDto> calculateUsersProfit(LocalDateTime from, LocalDateTime to);
+    List<UserProfitItemInfoDto> calculateUsersProfit();
 }
