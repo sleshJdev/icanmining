@@ -6,7 +6,7 @@ public class UserProfitItem {
     private Long id;
     private String username;
     private BigDecimal profit;
-    private boolean active;
+    private Boolean active;
 
     public UserProfitItem() {
     }
@@ -42,11 +42,11 @@ public class UserProfitItem {
         this.profit = profit;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 }
