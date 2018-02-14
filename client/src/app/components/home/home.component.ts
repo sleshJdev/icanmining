@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../common/auth.service';
-import {HttpClient} from "@angular/common/http";
-import {UserProfitInfo} from "../../model/user-profit-info.";
+import {HttpClient} from '@angular/common/http';
+import {UserProfitInfo} from '../../model/user-profit-info';
 
 @Component({
   selector: 'app-home',

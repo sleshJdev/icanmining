@@ -1,14 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs/Observable";
-import {HttpClient} from "@angular/common/http";
-import {Subscription} from "rxjs/Subscription";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {HttpClient} from '@angular/common/http';
+import {Subscription} from 'rxjs/Subscription';
+
+export class Wallet {
+  address: string;
+  balance: number;
+  usdAmount: number;
+}
 
 @Component({
   selector: 'app-wallet',
   templateUrl: './wallet.component.html',
   styleUrls: ['./wallet.component.css']
 })
-export class WalletComponent implements OnInit {
+export class WalletComponent implements OnInit, OnDestroy {
   protected pullingSubscription: Subscription;
   protected wallet: Wallet = new Wallet();
 
@@ -36,10 +42,4 @@ export class WalletComponent implements OnInit {
         this.wallet = response;
       });
   }
-}
-
-export class Wallet {
-  address: string;
-  balance: number;
-  usdAmount: number;
 }

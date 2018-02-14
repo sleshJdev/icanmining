@@ -4,7 +4,7 @@ import {SignInComponent} from './components/sign-in/sign-in.component';
 import {HomeComponent} from './components/home/home.component';
 import {SettingsComponent} from './components/settings/settings.component';
 import {SignUpComponent} from './components/sign-up/sign-up.component';
-import {UsersComponent} from "./components/users/users.component";
+import {UsersComponent} from './components/users/users.component';
 
 const routes: Routes = [
   {path: 'sign-in', component: SignInComponent},

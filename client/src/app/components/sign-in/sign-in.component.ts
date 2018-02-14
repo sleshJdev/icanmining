@@ -3,8 +3,8 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../common/auth.service';
-import {MatDialog} from "@angular/material";
-import {InfoModalComponent} from "../../common/modal/info-modal/info-modal.component";
+import {MatDialog} from '@angular/material';
+import {InfoModalComponent} from '../../common/modal/info-modal/info-modal.component';
 
 @Component({
   selector: 'app-sign-in',

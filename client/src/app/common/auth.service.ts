@@ -20,7 +20,7 @@ export class AuthService implements OnInit {
     return this.authDetails;
   }
 
-  public restore() {
+  restore() {
     const tokenHeaderName = localStorage.getItem(this.tokenHeaderNameKey);
     this.authDetails = JSON.parse(localStorage.getItem(tokenHeaderName));
   }

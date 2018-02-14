@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
-import {UserProfitInfo} from '../../model/user-profit-info.';
+import {UserProfitInfo} from '../../model/user-profit-info';
 
 @Component({
   selector: 'app-users',
