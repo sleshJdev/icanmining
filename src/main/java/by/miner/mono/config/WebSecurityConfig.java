@@ -26,19 +26,22 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final String signInUrl;
+    private final String signUpUrl;
     private final int strength;
     private final UserDetailsService userDetailsService;
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     public WebSecurityConfig(@Value("${auth.signInUrl}") String signInUrl,
+                             @Value("${auth.signUpUrl}") String signUpUrl,
                              @Value("${security.password.strength}") int strength,
                              UserDetailsService userDetailsService,
                              JwtAuthorizationFilter jwtAuthorizationFilter,
                              JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint) {
-        this.userDetailsService = userDetailsService;
-        this.strength = strength;
         this.signInUrl = signInUrl;
+        this.signUpUrl = signUpUrl;
+        this.strength = strength;
+        this.userDetailsService = userDetailsService;
         this.jwtAuthorizationFilter = jwtAuthorizationFilter;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
     }
@@ -47,6 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, signInUrl).permitAll()
+                .antMatchers(HttpMethod.POST, signUpUrl).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterAt(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
