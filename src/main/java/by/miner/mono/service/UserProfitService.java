@@ -1,12 +1,10 @@
 package by.miner.mono.service;
 
-import by.miner.mono.dto.UserProfitDto;
-import by.miner.mono.dto.UserProfitItemInfoDto;
+import by.miner.mono.dto.UserProfitItem;
+import by.miner.mono.dto.UserProfitRequest;
 import by.miner.mono.persistence.model.ApplicationUser;
-import by.miner.mono.persistence.model.UserProfit;
 import by.miner.mono.persistence.repository.ApplicationUserRepository;
 import by.miner.mono.persistence.repository.UserProfitRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,29 +17,28 @@ public class UserProfitService {
     private final UserProfitRepository userProfitRepository;
     private final ApplicationUserRepository applicationUserRepository;
 
-    @Autowired
     public UserProfitService(UserProfitRepository userProfitRepository, ApplicationUserRepository applicationUserRepository) {
         this.userProfitRepository = userProfitRepository;
         this.applicationUserRepository = applicationUserRepository;
     }
 
     @Transactional
-    public void saveUserProfit(ApplicationUser user, UserProfitDto userProfitDto) {
-        userProfitRepository.save(new UserProfit(
+    public void saveUserProfit(ApplicationUser user, UserProfitRequest userProfitRequest) {
+        userProfitRepository.save(new by.miner.mono.persistence.model.UserProfit(
                 applicationUserRepository.findOne(user.getId()),
-                userProfitDto.getProfit(),
-                userProfitDto.getMiningInterval(),
+                userProfitRequest.getProfit(),
+                userProfitRequest.getMiningInterval(),
                 OffsetDateTime.now(ZoneOffset.UTC).toLocalDateTime()
         ));
     }
 
     @Transactional(readOnly = true)
-    public Collection<UserProfitItemInfoDto> calculateProfit() {
+    public Collection<UserProfitItem> calculateProfit() {
         return userProfitRepository.calculateUsersProfit();
     }
 
     @Transactional(readOnly = true)
-    public UserProfitItemInfoDto calculateProfit(long id) {
+    public UserProfitItem calculateProfit(long id) {
         return userProfitRepository.calculateUserProfit(id);
     }
 }

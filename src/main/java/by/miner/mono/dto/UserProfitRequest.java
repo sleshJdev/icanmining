@@ -2,7 +2,7 @@ package by.miner.mono.dto;
 
 import java.math.BigDecimal;
 
-public final class UserProfitDto {
+public final class UserProfitRequest {
     private BigDecimal miningInterval;
     private BigDecimal profit;
 

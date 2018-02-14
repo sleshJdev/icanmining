@@ -1,15 +1,17 @@
 package by.miner.mono.persistence.model;
 
-import by.miner.mono.dto.UserProfitItemInfoDto;
+import by.miner.mono.dto.UserProfitItem;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import static by.miner.mono.persistence.model.UserProfit.USER_PROFIT_MAPPING_NAME;
+
 @SqlResultSetMapping(
-        name = "by.miner.mono.dto.UserProfitItemInfoDto",
+        name = USER_PROFIT_MAPPING_NAME,
         classes = @ConstructorResult(
-                targetClass = UserProfitItemInfoDto.class,
+                targetClass = UserProfitItem.class,
                 columns = {
                         @ColumnResult(name = "id", type = Long.class),
                         @ColumnResult(name = "username", type = String.class),
@@ -20,7 +22,7 @@ import java.time.LocalDateTime;
 )
 @Entity
 public class UserProfit {
-    public static final String USER_PROFIT_MAPPING_NAME = "by.miner.mono.dto.UserProfitItemInfoDto";
+    public static final String USER_PROFIT_MAPPING_NAME = "by.miner.mono.dto.UserProfitItem";
     @Id
     @GeneratedValue
     private Long id;

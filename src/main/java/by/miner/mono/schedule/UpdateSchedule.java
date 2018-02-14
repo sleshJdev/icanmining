@@ -8,10 +8,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -21,28 +23,33 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 
-@Service
-public class BalanceUpdateService {
-    private static final String WALLET_STATS_URL_FORMAT = "https://api.nicehash.com/api?method=stats.provider&addr=%s";
-    private static final String INFO_URL = "https://api.nicehash.com/api?method=nicehash.service.info";
-
+@Component
+public class UpdateSchedule {
+    private final String walletStatsUrlFormat;
+    private final String infoUrl;
     private final WalletRepository walletRepository;
     private final ExchangeRateRepository exchangeRateRepository;
     private final RestTemplate restTemplate;
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
 
-    public BalanceUpdateService(WalletRepository walletRepository, ExchangeRateRepository exchangeRateRepository,
-                                RestTemplate restTemplate) {
+    public UpdateSchedule(@Value("${app.nicehash.wallet_stats_url_format}") String walletStatsUrlFormat,
+                          @Value("${app.nicehash.info_url}") String infoUrl,
+                          WalletRepository walletRepository,
+                          ExchangeRateRepository exchangeRateRepository,
+                          RestTemplate restTemplate, ObjectMapper objectMapper) {
+        this.walletStatsUrlFormat = walletStatsUrlFormat;
+        this.infoUrl = infoUrl;
         this.walletRepository = walletRepository;
         this.exchangeRateRepository = exchangeRateRepository;
         this.restTemplate = restTemplate;
+        this.objectMapper = objectMapper;
     }
 
     @Scheduled(fixedDelayString = "${app.exchange-rate.update.delay}")
     public void updateExchangeRate() throws IOException {
         ResponseEntity<String> exchange = restTemplate.exchange(
-                new RequestEntity<>(HttpMethod.GET, URI.create(INFO_URL)), String.class);
-        ArrayNode exchanges = (ArrayNode) mapper.readTree(exchange.getBody()).get("result").get("exchanges");
+                new RequestEntity<>(HttpMethod.GET, URI.create(infoUrl)), String.class);
+        ArrayNode exchanges = (ArrayNode) objectMapper.readTree(exchange.getBody()).get("result").get("exchanges");
         for (ExchangeRate exchangeRate : exchangeRateRepository.findAll()) {
             for (int i = 0; i < exchanges.size(); i++) {
                 ObjectNode rate = (ObjectNode) exchanges.get(i);
@@ -59,10 +66,10 @@ public class BalanceUpdateService {
     @Scheduled(fixedDelayString = "${app.wallet.update.delay}")
     public void updateBalance() throws IOException {
         Wallet wallet = walletRepository.findWallet();
-        String url = String.format(WALLET_STATS_URL_FORMAT, wallet.getAddress());
+        String url = String.format(walletStatsUrlFormat, wallet.getAddress());
         ResponseEntity<String> exchange = restTemplate.exchange(
                 new RequestEntity<>(HttpMethod.GET, URI.create(url)), String.class);
-        List<JsonNode> balances = mapper.readTree(exchange.getBody())
+        List<JsonNode> balances = objectMapper.readTree(exchange.getBody())
                 .get("result").get("stats").findValues("balance");
         BigDecimal balance = balances.stream()
                 .map(JsonNode::asDouble)
@@ -71,5 +78,4 @@ public class BalanceUpdateService {
         wallet.setBalance(balance);
         walletRepository.save(wallet);
     }
-
 }

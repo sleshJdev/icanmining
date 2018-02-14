@@ -1,6 +1,6 @@
 package by.miner.mono.service;
 
-import by.miner.mono.dto.UserProfitDto;
+import by.miner.mono.dto.UserProfitRequest;
 import by.miner.mono.persistence.model.ApplicationUser;
 import by.miner.mono.persistence.repository.ApplicationUserRepository;
 import org.junit.Before;
@@ -32,7 +32,7 @@ public class UserProfitServiceTest {
 
     @Test
     public void saveUserProfit() {
-        UserProfitDto dto = new UserProfitDto();
+        UserProfitRequest dto = new UserProfitRequest();
         dto.setMiningInterval(BigDecimal.valueOf(1000));
         dto.setProfit(BigDecimal.TEN);
         userProfitService.saveUserProfit(user, dto);

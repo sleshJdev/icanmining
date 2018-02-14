@@ -1,6 +1,6 @@
 package by.miner.mono.persistence.repository;
 
-import by.miner.mono.dto.UserProfitItemInfoDto;
+import by.miner.mono.dto.UserProfitItem;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public interface UserProfitRepositoryCustom {
                 CALCULATE_USERS_PROFIT_QUERY +
             ") AS t WHERE t.id = :id";
 
-    List<UserProfitItemInfoDto> calculateUsersProfit();
+    List<UserProfitItem> calculateUsersProfit();
 
-    UserProfitItemInfoDto calculateUserProfit(long id);
+    UserProfitItem calculateUserProfit(long id);
 }

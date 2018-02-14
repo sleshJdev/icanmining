@@ -6,7 +6,6 @@ import by.miner.mono.persistence.model.Role;
 import by.miner.mono.persistence.repository.ApplicationUserRepository;
 import by.miner.mono.persistence.repository.RoleRepository;
 import by.miner.mono.security.Credentials;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +16,6 @@ public class ApplicationUserService {
     private final ApplicationUserRepository applicationUserRepository;
     private final RoleRepository roleRepository;
 
-    @Autowired
     public ApplicationUserService(ApplicationUserRepository applicationUserRepository, RoleRepository roleRepository) {
         this.applicationUserRepository = applicationUserRepository;
         this.roleRepository = roleRepository;

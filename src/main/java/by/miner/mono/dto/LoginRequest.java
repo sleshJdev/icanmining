@@ -1,6 +1,6 @@
 package by.miner.mono.dto;
 
-public final class LoginDto {
+public final class LoginRequest {
     private String username;
     private String password;
 

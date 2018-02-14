@@ -1,7 +1,7 @@
 package by.miner.mono.web.controller;
 
-import by.miner.mono.dto.UserProfitDto;
-import by.miner.mono.dto.UserProfitItemInfoDto;
+import by.miner.mono.dto.UserProfitRequest;
+import by.miner.mono.dto.UserProfitItem;
 import by.miner.mono.persistence.model.ApplicationUser;
 import by.miner.mono.persistence.repository.ApplicationUserRepository;
 import by.miner.mono.service.UserProfitService;
@@ -25,20 +25,20 @@ public class UserProfitController {
     }
 
     @GetMapping("/user")
-    public UserProfitItemInfoDto getUserProfit(Principal principal) {
+    public UserProfitItem getUserProfit(Principal principal) {
         ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
         return userProfitService.calculateProfit(user.getId());
     }
 
     @PostMapping
-    public void saveUserProfit(@RequestBody UserProfitDto userProfitDto, Principal principal) {
+    public void saveUserProfit(@RequestBody UserProfitRequest userProfitRequest, Principal principal) {
         ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
-        userProfitService.saveUserProfit(user, userProfitDto);
+        userProfitService.saveUserProfit(user, userProfitRequest);
     }
 
     @GetMapping("/users")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Collection<UserProfitItemInfoDto> getProfitInfo() {
+    public Collection<UserProfitItem> getProfitInfo() {
         return userProfitService.calculateProfit();
     }
 }

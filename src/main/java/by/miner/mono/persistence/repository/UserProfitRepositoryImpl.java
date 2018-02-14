@@ -1,6 +1,6 @@
 package by.miner.mono.persistence.repository;
 
-import by.miner.mono.dto.UserProfitItemInfoDto;
+import by.miner.mono.dto.UserProfitItem;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,14 +14,14 @@ public class UserProfitRepositoryImpl implements UserProfitRepositoryCustom {
     private EntityManager em;
 
     @SuppressWarnings("unchecked")
-    public List<UserProfitItemInfoDto> calculateUsersProfit() {
+    public List<UserProfitItem> calculateUsersProfit() {
         return em.createNativeQuery(CALCULATE_USERS_PROFIT_QUERY, USER_PROFIT_MAPPING_NAME)
                 .getResultList();
     }
 
     @Override
-    public UserProfitItemInfoDto calculateUserProfit(long id) {
-        return (UserProfitItemInfoDto) em.createNativeQuery(CALCULATE_USER_PROFIT_QUERY, USER_PROFIT_MAPPING_NAME)
+    public UserProfitItem calculateUserProfit(long id) {
+        return (UserProfitItem) em.createNativeQuery(CALCULATE_USER_PROFIT_QUERY, USER_PROFIT_MAPPING_NAME)
                 .setParameter("id", id)
                 .getSingleResult();
     }

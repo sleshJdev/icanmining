@@ -2,16 +2,16 @@ package by.miner.mono.dto;
 
 import java.math.BigDecimal;
 
-public class UserProfitItemInfoDto {
+public class UserProfitItem {
     private Long id;
     private String username;
     private BigDecimal profit;
     private boolean active;
 
-    public UserProfitItemInfoDto() {
+    public UserProfitItem() {
     }
 
-    public UserProfitItemInfoDto(Long id, String username, BigDecimal profit, boolean active) {
+    public UserProfitItem(Long id, String username, BigDecimal profit, boolean active) {
         this.id = id;
         this.username = username;
         this.profit = profit;

@@ -13,11 +13,10 @@ import org.springframework.stereotype.Service;
 import static java.util.stream.Collectors.toList;
 
 @Service
-public class SimpleUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
     private ApplicationUserRepository userRepository;
 
-    @Autowired
-    public SimpleUserDetailsService(ApplicationUserRepository applicationUserRepository) {
+    public UserDetailsServiceImpl(ApplicationUserRepository applicationUserRepository) {
         this.userRepository = applicationUserRepository;
     }
 

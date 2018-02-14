@@ -19,11 +19,11 @@ import java.util.List;
 public class BalanceUpdateTaskTest {
 
     @Autowired
-    private BalanceUpdateService balanceUpdateService;
+    private UpdateSchedule updateSchedule;
 
     @Test
     public void testUpdateBalance() throws IOException {
-        balanceUpdateService.updateBalance();
+        updateSchedule.updateBalance();
     }
 
     @Test

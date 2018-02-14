@@ -1,13 +1,11 @@
 package by.miner.mono.security;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -19,22 +17,30 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static by.miner.mono.security.SecurityConstants.*;
 import static java.util.stream.Collectors.toList;
 
+@Component
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
+    private final AuthenticationProperties authenticationProperties;
+    private final JwtService jwtService;
+
+    public JwtAuthorizationFilter(AuthenticationProperties authenticationProperties, JwtService jwtService) {
+        this.authenticationProperties = authenticationProperties;
+        this.jwtService = jwtService;
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
             throws IOException, ServletException {
-        String rawToken = req.getHeader(HEADER_STRING);
+        String authToken = req.getHeader(authenticationProperties.getHeaderString());
 
-        if (rawToken == null || !rawToken.startsWith(TOKEN_PREFIX)) {
+        if (authToken == null || !authToken.startsWith(authenticationProperties.getTokenPrefix())) {
             chain.doFilter(req, res);
             return;
         }
 
-        JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SECRET_KEY)).build();
-        DecodedJWT token = verifier.verify(rawToken.replace(TOKEN_PREFIX, ""));
+        String rawToken = authToken.substring(authenticationProperties.getTokenPrefix().length());
+        DecodedJWT token = jwtService.verify(rawToken);
 
         String username = token.getClaim(Claims.USERNAME.name()).asString();
         if (StringUtils.isEmpty(username)) {
