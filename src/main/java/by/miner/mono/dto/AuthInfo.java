@@ -5,8 +5,11 @@ import by.miner.mono.enums.RoleName;
 import java.util.List;
 
 public class AuthInfo {
-    private final Token token;
-    private final User user;
+    private Token token;
+    private User user;
+
+    public AuthInfo() {
+    }
 
     public AuthInfo(Token token, User user) {
         this.token = token;
@@ -22,8 +25,11 @@ public class AuthInfo {
     }
 
     public static final class Token {
-        private final String name;
-        private final String value;
+        private String name;
+        private String value;
+
+        public Token() {
+        }
 
         public Token(String name, String value) {
             this.name = name;
@@ -40,8 +46,11 @@ public class AuthInfo {
     }
 
     public static final class User {
-        private final String username;
-        private final List<RoleName> roles;
+        private String username;
+        private List<RoleName> roles;
+
+        public User() {
+        }
 
         public User(String username, List<RoleName> roles) {
             this.username = username;
