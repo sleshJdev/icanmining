@@ -37,7 +37,7 @@ public class UserProfitController {
     }
 
     @GetMapping("/users")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public Collection<UserProfitItem> getProfitInfo() {
         return userProfitService.calculateProfit();
     }

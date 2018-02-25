@@ -23,7 +23,7 @@ public class WalletController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public WalletDto getWalletDetails() {
         return walletService.findWallet();
     }
