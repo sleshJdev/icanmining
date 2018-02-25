@@ -13,12 +13,12 @@ import {InfoModalComponent} from '../../common/modal/info-modal/info-modal.compo
 })
 export class SignInComponent {
 
-  protected options: FormGroup;
+  options: FormGroup;
 
-  constructor(private authService: AuthService,
-              private router: Router,
-              private dialog: MatDialog,
-              private formBuilder: FormBuilder) {
+  constructor(public authService: AuthService,
+              public router: Router,
+              public dialog: MatDialog,
+              public formBuilder: FormBuilder) {
     this.options = formBuilder.group({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])

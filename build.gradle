@@ -32,3 +32,8 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.security:spring-security-test')
 }
+
+task copyResource(type: Copy) {
+    from './client/dist'
+    into './src/main/resources/static'
+}

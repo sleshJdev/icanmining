@@ -11,13 +11,13 @@ import {UserProfitInfo} from '../../model/user-profit-info';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit, OnDestroy, AfterViewInit {
-  protected pullingSubscription: Subscription;
-  protected displayedColumns = ['id', 'username', 'profit', 'active'];
-  protected dataSource = new MatTableDataSource<UserProfitInfo>();
+  pullingSubscription: Subscription;
+  displayedColumns = ['id', 'username', 'profit', 'active'];
+  dataSource = new MatTableDataSource<UserProfitInfo>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private http: HttpClient) {
+  constructor(public http: HttpClient) {
   }
 
   update() {

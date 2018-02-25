@@ -12,12 +12,12 @@ import {MatDialog} from '@angular/material';
 })
 export class SignUpComponent {
 
-  protected options: FormGroup;
+  options: FormGroup;
 
-  constructor(private authService: AuthService,
-              private dialog: MatDialog,
-              private router: Router,
-              private formBuilder: FormBuilder) {
+  constructor(public authService: AuthService,
+              public dialog: MatDialog,
+              public router: Router,
+              public formBuilder: FormBuilder) {
     this.options = formBuilder.group({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])

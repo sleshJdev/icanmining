@@ -11,8 +11,8 @@ import {UserProfitInfo} from '../../model/user-profit-info';
 export class HomeComponent implements OnInit {
   protected userProfitInfo = {};
 
-  constructor(private authService: AuthService,
-              private http: HttpClient) {
+  constructor(public authService: AuthService,
+              public http: HttpClient) {
   }
 
   ngOnInit() {

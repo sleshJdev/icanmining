@@ -15,10 +15,10 @@ export class Wallet {
   styleUrls: ['./wallet.component.css']
 })
 export class WalletComponent implements OnInit, OnDestroy {
-  protected pullingSubscription: Subscription;
-  protected wallet: Wallet = new Wallet();
+  pullingSubscription: Subscription;
+  wallet: Wallet = new Wallet();
 
-  constructor(private http: HttpClient) {
+  constructor(public http: HttpClient) {
   }
 
   private pull() {

@@ -7,10 +7,10 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-  protected bitcoinAddress = {address: ''};
-  protected editable = false;
+  bitcoinAddress = {address: ''};
+  editable = false;
 
-  constructor(private http: HttpClient) {
+  constructor(public http: HttpClient) {
   }
 
   ngOnInit() {
