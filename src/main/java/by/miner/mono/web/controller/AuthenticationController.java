@@ -14,10 +14,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -27,24 +25,19 @@ import static java.util.stream.Collectors.toList;
 @RestController
 public class AuthenticationController {
     private final ApplicationUserService applicationUserService;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final AuthenticationProperties authenticationProperties;
 
-    public AuthenticationController(ApplicationUserService applicationUserService,
-                                    BCryptPasswordEncoder bCryptPasswordEncoder,
-                                    AuthenticationManager authenticationManager,
+    public AuthenticationController(ApplicationUserService applicationUserService, AuthenticationManager authenticationManager,
                                     JwtService jwtService, AuthenticationProperties authenticationProperties) {
         this.applicationUserService = applicationUserService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
         this.authenticationProperties = authenticationProperties;
     }
 
     @PostMapping("${auth.signInUrl}")
-    @ResponseBody
     public AuthInfo signIn(@RequestBody Credentials credentials) {
         ApplicationUser user = applicationUserService.findByUsername(credentials.getUsername());
         if (user == null) {
@@ -70,7 +63,6 @@ public class AuthenticationController {
 
     @PostMapping("${auth.signUpUrl}")
     public void signUp(@RequestBody Credentials credentials) {
-        credentials.setPassword(bCryptPasswordEncoder.encode(credentials.getPassword()));
-        applicationUserService.save(credentials);
+        applicationUserService.saveUser(credentials);
     }
 }

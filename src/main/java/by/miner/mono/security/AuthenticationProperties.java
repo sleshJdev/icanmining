@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties("auth.token")
+@ConfigurationProperties("auth")
 public class AuthenticationProperties {
     private long maxAgeSeconds;
     private String issuer;
@@ -13,6 +13,8 @@ public class AuthenticationProperties {
     private String headerString;
     private String signUpUrl;
     private String signInUrl;
+    private String signOutUrl;
+    private String signOutSuccessRedirectUrl;
 
     public String getIssuer() {
         return issuer;
@@ -68,5 +70,21 @@ public class AuthenticationProperties {
 
     public void setSignInUrl(String signInUrl) {
         this.signInUrl = signInUrl;
+    }
+
+    public String getSignOutUrl() {
+        return signOutUrl;
+    }
+
+    public void setSignOutUrl(String signOutUrl) {
+        this.signOutUrl = signOutUrl;
+    }
+
+    public String getSignOutSuccessRedirectUrl() {
+        return signOutSuccessRedirectUrl;
+    }
+
+    public void setSignOutSuccessRedirectUrl(String signOutSuccessRedirectUrl) {
+        this.signOutSuccessRedirectUrl = signOutSuccessRedirectUrl;
     }
 }
