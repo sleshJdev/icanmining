@@ -51,10 +51,12 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             throw new UsernameNotFoundException("Role not found in the auth token");
         }
 
-        UsernamePasswordAuthenticationToken authentication =
-                new UsernamePasswordAuthenticationToken(username, null,
-                        roleNames.stream().map(SimpleGrantedAuthority::new).collect(toList()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        if (SecurityContextHolder.getContext().getAuthentication() == null) {
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(username, null,
+                            roleNames.stream().map(SimpleGrantedAuthority::new).collect(toList()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        }
 
         chain.doFilter(req, res);
     }
