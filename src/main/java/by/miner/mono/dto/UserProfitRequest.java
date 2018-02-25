@@ -6,6 +6,14 @@ public final class UserProfitRequest {
     private BigDecimal miningInterval;
     private BigDecimal profit;
 
+    public UserProfitRequest() {
+    }
+
+    public UserProfitRequest(BigDecimal miningInterval, BigDecimal profit) {
+        this.miningInterval = miningInterval;
+        this.profit = profit;
+    }
+
     public BigDecimal getMiningInterval() {
         return miningInterval;
     }
