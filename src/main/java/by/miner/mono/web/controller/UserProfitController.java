@@ -1,9 +1,9 @@
 package by.miner.mono.web.controller;
 
-import by.miner.mono.dto.UserProfitRequest;
+import by.miner.mono.dto.ApplicationUserDto;
 import by.miner.mono.dto.UserProfitItem;
-import by.miner.mono.persistence.model.ApplicationUser;
-import by.miner.mono.persistence.repository.ApplicationUserRepository;
+import by.miner.mono.dto.UserProfitRequest;
+import by.miner.mono.service.ApplicationUserService;
 import by.miner.mono.service.UserProfitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,23 +16,23 @@ import java.util.Collection;
 @RequestMapping("/api/profit")
 public class UserProfitController {
     private final UserProfitService userProfitService;
-    private final ApplicationUserRepository applicationUserRepository;
+    private final ApplicationUserService applicationUserService;
 
     @Autowired
-    public UserProfitController(UserProfitService userProfitService, ApplicationUserRepository applicationUserRepository) {
+    public UserProfitController(UserProfitService userProfitService, ApplicationUserService applicationUserService) {
         this.userProfitService = userProfitService;
-        this.applicationUserRepository = applicationUserRepository;
+        this.applicationUserService = applicationUserService;
     }
 
     @GetMapping("/user")
     public UserProfitItem getUserProfit(Principal principal) {
-        ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
+        ApplicationUserDto user = applicationUserService.findByUsername(principal.getName());
         return userProfitService.calculateProfit(user.getId());
     }
 
     @PostMapping
     public void saveUserProfit(@RequestBody UserProfitRequest userProfitRequest, Principal principal) {
-        ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
+        ApplicationUserDto user = applicationUserService.findByUsername(principal.getName());
         userProfitService.saveUserProfit(user, userProfitRequest);
     }
 

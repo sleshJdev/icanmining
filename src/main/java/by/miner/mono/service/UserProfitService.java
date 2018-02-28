@@ -1,8 +1,10 @@
 package by.miner.mono.service;
 
+import by.miner.mono.dto.ApplicationUserDto;
 import by.miner.mono.dto.UserProfitItem;
 import by.miner.mono.dto.UserProfitRequest;
 import by.miner.mono.persistence.model.ApplicationUser;
+import by.miner.mono.persistence.model.UserProfit;
 import by.miner.mono.persistence.repository.ApplicationUserRepository;
 import by.miner.mono.persistence.repository.UserProfitRepository;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class UserProfitService {
@@ -23,8 +26,8 @@ public class UserProfitService {
     }
 
     @Transactional
-    public void saveUserProfit(ApplicationUser user, UserProfitRequest userProfitRequest) {
-        userProfitRepository.save(new by.miner.mono.persistence.model.UserProfit(
+    public void saveUserProfit(ApplicationUserDto user, UserProfitRequest userProfitRequest) {
+        userProfitRepository.save(new UserProfit(
                 applicationUserRepository.findOne(user.getId()),
                 userProfitRequest.getProfit(),
                 userProfitRequest.getMiningInterval(),
@@ -33,7 +36,7 @@ public class UserProfitService {
     }
 
     @Transactional(readOnly = true)
-    public Collection<UserProfitItem> calculateProfit() {
+    public List<UserProfitItem> calculateProfit() {
         return userProfitRepository.calculateUsersProfit();
     }
 

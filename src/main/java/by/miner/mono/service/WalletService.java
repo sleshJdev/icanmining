@@ -33,4 +33,11 @@ public class WalletService {
     public String findWalletAddress() {
         return walletRepository.findWallet().getAddress();
     }
+
+    @Transactional
+    public void updateBalance(BigDecimal balance) {
+        Wallet wallet = walletRepository.findWallet();
+        wallet.setBalance(balance);
+        walletRepository.save(wallet);
+    }
 }

@@ -17,11 +17,11 @@ public interface UserProfitRepositoryCustom {
             "FROM " +
             "  (SELECT user_id, " +
             "          username, " +
-            "          SUM(profit) user_profit " +
+            "          SUM(profit * mining_interval / 86400) user_profit " +
             "   FROM user_profit " +
             "   INNER JOIN application_user a ON user_profit.user_id = a.id " +
             "   GROUP BY user_id) AS t1, " +
-            "  (SELECT SUM(profit) total_profit " +
+            "  (SELECT SUM(profit * mining_interval / 86400) total_profit " +
             "   FROM user_profit) AS t2, " +
             "  (SELECT balance " +
             "   FROM wallet " +

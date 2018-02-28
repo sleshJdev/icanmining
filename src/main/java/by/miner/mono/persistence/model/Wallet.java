@@ -19,6 +19,14 @@ public class Wallet {
     @Column(nullable = false, precision = 19, scale = 15)
     private BigDecimal balance;
 
+    public Wallet() {
+    }
+
+    public Wallet(String address, BigDecimal balance) {
+        this.address = address;
+        this.balance = balance;
+    }
+
     public Long getId() {
         return id;
     }

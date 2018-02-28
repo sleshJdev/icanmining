@@ -31,8 +31,9 @@ public class ApplicationUserService {
     }
 
     @Transactional(readOnly = true)
-    public ApplicationUser findByUsername(String name) {
-        return applicationUserRepository.findByUsername(name);
+    public ApplicationUserDto findByUsername(String name) {
+        ApplicationUser user = applicationUserRepository.findByUsername(name);
+        return toDto(user);
     }
 
     @Transactional
@@ -51,6 +52,10 @@ public class ApplicationUserService {
                 credentials.getUsername(),
                 bCryptPasswordEncoder.encode(credentials.getPassword()),
                 Collections.singletonList(userRole)));
+        return toDto(user);
+    }
+
+    private ApplicationUserDto toDto(ApplicationUser user) {
         return new ApplicationUserDto(
                 user.getId(),
                 user.getUsername(),

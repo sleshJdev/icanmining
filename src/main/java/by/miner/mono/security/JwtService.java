@@ -1,5 +1,7 @@
 package by.miner.mono.security;
 
+import by.miner.mono.dto.ApplicationUserDto;
+import by.miner.mono.dto.RoleDto;
 import by.miner.mono.persistence.model.ApplicationUser;
 import by.miner.mono.persistence.model.Role;
 import com.auth0.jwt.JWT;
@@ -29,7 +31,7 @@ public class JwtService {
         return verifier.verify(token);
     }
 
-    public String generateToken(ApplicationUser user) {
+    public String generateToken(ApplicationUserDto user) {
         LocalDateTime now = LocalDateTime.now();
         return JWT.create()
                 .withIssuer(properties.getIssuer())
@@ -43,7 +45,7 @@ public class JwtService {
                 .withArrayClaim(Claims.ROLES.name(), user
                         .getRoles()
                         .stream()
-                        .map(Role::getName)
+                        .map(RoleDto::getName)
                         .map(Enum::name)
                         .toArray(String[]::new))
                 .withClaim(Claims.USERNAME.name(), user.getUsername())

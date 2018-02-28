@@ -31,6 +31,7 @@ dependencies {
 	compile "org.flywaydb:flyway-core:5.0.7"
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.security:spring-security-test')
+	testCompile('org.flywaydb.flyway-test-extensions:flyway-spring-test:5.0.0')
 }
 
 task copyResource(type: Copy) {

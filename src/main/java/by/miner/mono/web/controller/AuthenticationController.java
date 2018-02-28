@@ -1,9 +1,9 @@
 package by.miner.mono.web.controller;
 
+import by.miner.mono.dto.ApplicationUserDto;
 import by.miner.mono.dto.AuthInfo;
+import by.miner.mono.dto.RoleDto;
 import by.miner.mono.enums.RoleName;
-import by.miner.mono.persistence.model.ApplicationUser;
-import by.miner.mono.persistence.model.Role;
 import by.miner.mono.security.AuthenticationProperties;
 import by.miner.mono.security.Credentials;
 import by.miner.mono.security.JwtService;
@@ -39,12 +39,12 @@ public class AuthenticationController {
 
     @PostMapping("${auth.signInUrl}")
     public AuthInfo signIn(@RequestBody Credentials credentials) {
-        ApplicationUser user = applicationUserService.findByUsername(credentials.getUsername());
+        ApplicationUserDto user = applicationUserService.findByUsername(credentials.getUsername());
         if (user == null) {
             throw new AuthenticationServiceException("User not found");
         }
         List<String> roleNames = user.getRoles().stream()
-                .map(Role::getName).map(Enum::toString).collect(toList());
+                .map(RoleDto::getName).map(Enum::toString).collect(toList());
 
         Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
