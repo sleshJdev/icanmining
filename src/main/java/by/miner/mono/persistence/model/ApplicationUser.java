@@ -14,6 +14,9 @@ public class ApplicationUser {
     private String password;
     @ManyToMany
     private List<Role> roles;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Payout> payouts;
+
     public ApplicationUser() {
     }
 

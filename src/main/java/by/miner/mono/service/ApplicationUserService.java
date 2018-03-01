@@ -46,6 +46,11 @@ public class ApplicationUserService {
         return saveUser(credentials, RoleName.ROLE_USER);
     }
 
+    @Transactional
+    public void  delete(ApplicationUserDto userDto) {
+        applicationUserRepository.delete(userDto.getId());
+    }
+
     private ApplicationUserDto saveUser(Credentials credentials, RoleName roleName) {
         Role userRole = roleRepository.findByName(roleName);
         ApplicationUser user = applicationUserRepository.save(new ApplicationUser(
