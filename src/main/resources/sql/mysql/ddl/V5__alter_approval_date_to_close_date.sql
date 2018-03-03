@@ -1,0 +1,1 @@
+ALTER TABLE payout CHANGE COLUMN `approval_date` `close_date` DATETIME;
