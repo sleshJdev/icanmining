@@ -12,7 +12,7 @@ public interface WalletRepository extends CrudRepository<Wallet, Long> {
         return findAll().iterator().next();
     }
 
-    @Modifying
-    @Query("update Wallet set balance = balance - ?1")
-    void withdrawal(BigDecimal profit);
+    @Modifying(clearAutomatically = true)
+    @Query("update Wallet set balance = balance - ?1, withdrawnBtc = withdrawnBtc + ?1 where id = 1")
+    void withdrawal(BigDecimal amountBtc);
 }

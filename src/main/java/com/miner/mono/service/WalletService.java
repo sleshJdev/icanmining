@@ -43,11 +43,8 @@ public class WalletService {
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public WalletDto withdrawal(BigDecimal amountBtc) {
-        Wallet wallet = walletRepository.findWallet();
-        wallet.setBalance(wallet.getBalance().subtract(amountBtc));
-        wallet.setWithdrawnBtc(wallet.getWithdrawnBtc().add(amountBtc));
-        Wallet updatedWallet = walletRepository.save(wallet);
-        return toDto(updatedWallet);
+        walletRepository.withdrawal(amountBtc);
+        return findWallet();
     }
 
     private WalletDto toDto(Wallet wallet) {
