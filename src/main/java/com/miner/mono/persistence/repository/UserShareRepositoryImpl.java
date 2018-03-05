@@ -9,7 +9,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-import static com.miner.mono.persistence.model.UserShare.USER_PROFIT_MAPPING_NAME;
+import static com.miner.mono.persistence.model.UserShare.USER_SHARE_MAPPING_NAME;
 
 public class UserShareRepositoryImpl implements UserShareRepositoryCustom {
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -19,7 +19,7 @@ public class UserShareRepositoryImpl implements UserShareRepositoryCustom {
 
     @SuppressWarnings("unchecked")
     public List<UserProfitItem> calculateUsersProfit() {
-        return em.createNativeQuery(CALCULATE_USERS_PROFIT_QUERY, USER_PROFIT_MAPPING_NAME)
+        return em.createNativeQuery(CALCULATE_USERS_PROFIT_QUERY, USER_SHARE_MAPPING_NAME)
                 .getResultList();
     }
 
@@ -27,7 +27,7 @@ public class UserShareRepositoryImpl implements UserShareRepositoryCustom {
     public UserProfitItem calculateUserProfit(long id) {
         try {
             UserProfitItem userProfitItem = (UserProfitItem) em.createNativeQuery(
-                    CALCULATE_USER_PROFIT_QUERY, USER_PROFIT_MAPPING_NAME)
+                    CALCULATE_USER_PROFIT_QUERY, USER_SHARE_MAPPING_NAME)
                     .setParameter("id", id).getSingleResult();
             return userProfitItem;
         } catch (NoResultException e) {

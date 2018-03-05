@@ -6,10 +6,10 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import static com.miner.mono.persistence.model.UserShare.USER_PROFIT_MAPPING_NAME;
+import static com.miner.mono.persistence.model.UserShare.USER_SHARE_MAPPING_NAME;
 
 @SqlResultSetMapping(
-        name = USER_PROFIT_MAPPING_NAME,
+        name = USER_SHARE_MAPPING_NAME,
         classes = @ConstructorResult(
                 targetClass = UserProfitItem.class,
                 columns = {
@@ -22,7 +22,7 @@ import static com.miner.mono.persistence.model.UserShare.USER_PROFIT_MAPPING_NAM
 )
 @Entity
 public class UserShare {
-    public static final String USER_PROFIT_MAPPING_NAME = "UserProfitItem";
+    public static final String USER_SHARE_MAPPING_NAME = "UserShareItem";
     @Id
     private Long id;
     @MapsId
