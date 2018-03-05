@@ -36,6 +36,8 @@ public class WalletServiceTest {
     public void findWallet() {
         WalletDto wallet = walletService.findWallet();
         assertNotNull(wallet);
+        assertThat(wallet.getBalance(), comparesEqualTo(BigDecimal.ZERO));
+        assertThat(wallet.getWithdrawnBtc(), comparesEqualTo(BigDecimal.ZERO));
     }
 
     @Test
@@ -51,5 +53,18 @@ public class WalletServiceTest {
         walletService.updateBalance(BigDecimal.TEN);
         WalletDto updatedWallet = walletService.findWallet();
         assertThat(updatedWallet.getBalance(), comparesEqualTo(BigDecimal.TEN));
+    }
+
+    @Test
+    public void withdrawalBitcoin() {
+        WalletDto wallet0 = walletService.findWallet();
+        assertThat(wallet0.getBalance(), comparesEqualTo(BigDecimal.ZERO));
+
+        WalletDto wallet10 = walletService.updateBalance(BigDecimal.TEN);
+        assertThat(wallet10.getBalance(), comparesEqualTo(BigDecimal.TEN));
+
+        WalletDto walletDto = walletService.withdrawal(BigDecimal.ONE);
+        assertThat(walletDto.getBalance(), comparesEqualTo(BigDecimal.valueOf(9L)));
+        assertThat(walletDto.getWithdrawnBtc(), comparesEqualTo(BigDecimal.ONE));
     }
 }

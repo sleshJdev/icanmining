@@ -7,6 +7,7 @@ import com.miner.mono.persistence.model.Wallet;
 import com.miner.mono.persistence.repository.ExchangeRateRepository;
 import com.miner.mono.persistence.repository.WalletRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -21,23 +22,37 @@ public class WalletService {
         this.exchangeRateRepository = exchangeRateRepository;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, isolation = Isolation.SERIALIZABLE)
     public WalletDto findWallet() {
         Wallet wallet = walletRepository.findWallet();
-        ExchangeRate usdRate = exchangeRateRepository.findByCurrency(Currency.USD);
-        BigDecimal usdAmount = wallet.getBalance().multiply(usdRate.getRate());
-        return new WalletDto(wallet.getAddress(), wallet.getBalance(), usdAmount);
+        return toDto(wallet);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, isolation = Isolation.SERIALIZABLE)
     public String findWalletAddress() {
         return walletRepository.findWallet().getAddress();
     }
 
-    @Transactional
-    public void updateBalance(BigDecimal balance) {
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public WalletDto updateBalance(BigDecimal balance) {
         Wallet wallet = walletRepository.findWallet();
         wallet.setBalance(balance);
-        walletRepository.save(wallet);
+        Wallet updatedWallet = walletRepository.save(wallet);
+        return toDto(updatedWallet);
+    }
+
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public WalletDto withdrawal(BigDecimal amountBtc) {
+        Wallet wallet = walletRepository.findWallet();
+        wallet.setBalance(wallet.getBalance().subtract(amountBtc));
+        wallet.setWithdrawnBtc(wallet.getWithdrawnBtc().add(amountBtc));
+        Wallet updatedWallet = walletRepository.save(wallet);
+        return toDto(updatedWallet);
+    }
+
+    private WalletDto toDto(Wallet wallet) {
+        ExchangeRate usdRate = exchangeRateRepository.findByCurrency(Currency.USD);
+        BigDecimal usdAmount = wallet.getBalance().multiply(usdRate.getRate());
+        return new WalletDto(wallet.getAddress(), wallet.getBalance(), wallet.getWithdrawnBtc(), usdAmount);
     }
 }

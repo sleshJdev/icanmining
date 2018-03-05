@@ -1,0 +1,2 @@
+ALTER TABLE wallet
+  ADD COLUMN withdrawn_btc NUMERIC(19, 15) NOT NULL DEFAULT 0;
