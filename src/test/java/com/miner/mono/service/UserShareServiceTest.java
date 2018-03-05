@@ -68,9 +68,9 @@ public class UserShareServiceTest extends AbstractServiceTest {
         assertUserProfit(usersProfitAfterWithdrawal.get(1), user2, BigDecimal.valueOf(9L));
     }
 
-    private void assertUserProfit(UserProfitItem userProfit, ApplicationUserDto user, BigDecimal proft) {
+    private void assertUserProfit(UserProfitItem userProfit, ApplicationUserDto user, BigDecimal profit) {
         assertThat(userProfit.getId(), equalTo(user.getId()));
         assertThat(userProfit.getUsername(), equalTo(user.getUsername()));
-        assertThat(userProfit.getProfit(), comparesEqualTo(proft));
+        assertThat(userProfit.getProfit(), comparesEqualTo(profit));
     }
 }
