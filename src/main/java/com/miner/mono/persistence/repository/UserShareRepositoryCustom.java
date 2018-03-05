@@ -12,7 +12,7 @@ public interface UserShareRepositoryCustom {
             "  t1.username                                       username, " +
             "  t1.active                                         active, " +
             "  CASE WHEN t2.total_share = 0 THEN 0 " +
-            "  ELSE (t1.share / t2.total_share) * t3.balance END profit " +
+            "  ELSE (t1.share / t2.total_share) * t3.total_balance END profit " +
             "FROM " +
             "  (SELECT " +
             "     us.user_id, " +
@@ -24,7 +24,7 @@ public interface UserShareRepositoryCustom {
             "       ON us.user_id = a.id) AS t1, " +
             "  (SELECT SUM(share) total_share " +
             "   FROM user_share) AS t2, " +
-            "  (SELECT balance " +
+            "  (SELECT (balance + withdrawn_btc) as total_balance " +
             "   FROM wallet " +
             "   WHERE id = 1) AS t3";
 

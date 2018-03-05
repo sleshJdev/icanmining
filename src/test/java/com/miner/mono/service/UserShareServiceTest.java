@@ -30,31 +30,47 @@ public class UserShareServiceTest extends AbstractServiceTest {
         walletService.updateBalance(BigDecimal.TEN);
         user1 = applicationUserService.saveUser(new Credentials("user1", "password"));
         user2 = applicationUserService.saveUser(new Credentials("user2", "password"));
-    }
 
-    @Test
-    public void contributeShare() {
-        UserShareRequest shareRequest = new UserShareRequest(BigDecimal.valueOf(TimeUnit.DAYS.toSeconds(1)), BigDecimal.TEN);
-        userShareService.contribute(user1, shareRequest);
-        UserProfitItem userProfitItem = userShareService.calculateProfit(user1.getId());
-        assertThat(userProfitItem.getId(), equalTo(user1.getId()));
-        assertThat(userProfitItem.getUsername(), equalTo(user1.getUsername()));
-        assertThat(userProfitItem.getProfit(), comparesEqualTo(shareRequest.getShare()));
-    }
-
-    @Test
-    public void distributeProfitByUsers() {
         UserShareRequest userProfit1 = new UserShareRequest(BigDecimal.valueOf(TimeUnit.DAYS.toSeconds(1)), BigDecimal.ONE);
         UserShareRequest userProfit2 = new UserShareRequest(BigDecimal.valueOf(TimeUnit.DAYS.toSeconds(9)), BigDecimal.ONE);
         userShareService.contribute(user1, userProfit1);
         userShareService.contribute(user2, userProfit2);
+    }
+
+    @Test
+    public void calculateProfitById() {
+        UserProfitItem userProfitItem1 = userShareService.calculateProfit(user1.getId());
+        UserProfitItem userProfitItem2 = userShareService.calculateProfit(user2.getId());
+        assertUserProfit(userProfitItem1, user1, BigDecimal.valueOf(1L));
+        assertUserProfit(userProfitItem2, user2, BigDecimal.valueOf(9L));
+    }
+
+    @Test
+    public void distributeProfitByUsers() {
         List<UserProfitItem> userProfitItems = userShareService.calculateProfits();
         assertThat(userProfitItems, hasSize(2));
-        assertThat(userProfitItems.get(0).getId(), equalTo(user1.getId()));
-        assertThat(userProfitItems.get(0).getUsername(), equalTo(user1.getUsername()));
-        assertThat(userProfitItems.get(0).getProfit(), comparesEqualTo(BigDecimal.valueOf(1L)));
-        assertThat(userProfitItems.get(1).getId(), equalTo(user2.getId()));
-        assertThat(userProfitItems.get(1).getUsername(), equalTo(user2.getUsername()));
-        assertThat(userProfitItems.get(1).getProfit(), comparesEqualTo(BigDecimal.valueOf(9L)));
+        assertUserProfit(userProfitItems.get(0), user1, BigDecimal.valueOf(1L));
+        assertUserProfit(userProfitItems.get(1), user2, BigDecimal.valueOf(9L));
+    }
+
+    @Test
+    public void distributeWithWalletWithdrawal() {
+        List<UserProfitItem> userProfitItems = userShareService.calculateProfits();
+        assertThat(userProfitItems, hasSize(2));
+        assertUserProfit(userProfitItems.get(0), user1, BigDecimal.valueOf(1L));
+        assertUserProfit(userProfitItems.get(1), user2, BigDecimal.valueOf(9L));
+
+        walletService.withdrawal(BigDecimal.valueOf(5L));
+
+        List<UserProfitItem> usersProfitAfterWithdrawal = userShareService.calculateProfits();
+        assertThat(usersProfitAfterWithdrawal, hasSize(2));
+        assertUserProfit(usersProfitAfterWithdrawal.get(0), user1, BigDecimal.valueOf(1L));
+        assertUserProfit(usersProfitAfterWithdrawal.get(1), user2, BigDecimal.valueOf(9L));
+    }
+
+    private void assertUserProfit(UserProfitItem userProfit, ApplicationUserDto user, BigDecimal proft) {
+        assertThat(userProfit.getId(), equalTo(user.getId()));
+        assertThat(userProfit.getUsername(), equalTo(user.getUsername()));
+        assertThat(userProfit.getProfit(), comparesEqualTo(proft));
     }
 }
