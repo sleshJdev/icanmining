@@ -10,6 +10,7 @@ import com.miner.mono.persistence.repository.PayoutRepository;
 import com.miner.mono.persistence.repository.UserShareRepository;
 import com.miner.mono.persistence.repository.WalletRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -44,7 +45,7 @@ public class PayoutService {
         return toDto(payout);
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public PayoutDto approvePayout(long payoutId) {
         LocalDateTime now = ZonedDateTime.now(ZoneOffset.UTC).toLocalDateTime();
         Payout payout = payoutRepository.findOne(payoutId);
