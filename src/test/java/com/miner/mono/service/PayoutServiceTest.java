@@ -93,7 +93,7 @@ public class PayoutServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testCancelPayout() {
+    public void cancelPayout() {
         PayoutDto payout = payoutService.createPayout(user1);
         assertFalse(payout.isCanceled());
         PayoutDto canceledPayout = payoutService.cancelPayout(payout.getId());
@@ -101,7 +101,7 @@ public class PayoutServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void getApprovalPendingPayouts() {
+    public void findApprovalPendingPayouts() {
         PayoutDto payout1 = payoutService.createPayout(user1);
         PayoutDto payout2 = payoutService.createPayout(user2);
         PayoutDto payout3 = payoutService.createPayout(user3);
