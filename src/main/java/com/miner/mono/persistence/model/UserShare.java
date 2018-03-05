@@ -26,7 +26,7 @@ public class UserShare {
     @Id
     private Long id;
     @MapsId
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private ApplicationUser user;
     @Column(nullable = false, precision = 19, scale = 15)
     private BigDecimal share;

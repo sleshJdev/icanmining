@@ -14,14 +14,18 @@ public class ApplicationUser {
     private String password;
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Role> roles;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private UserShare userShare;
 
     public ApplicationUser() {
     }
 
-    public ApplicationUser(String username, String password, List<Role> roles) {
+    public ApplicationUser(String username, String password, List<Role> roles, UserShare userShare) {
         this.username = username;
         this.password = password;
         this.roles = roles;
+        this.userShare = userShare;
     }
 
     public Long getId() {
@@ -54,5 +58,13 @@ public class ApplicationUser {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public UserShare getUserShare() {
+        return userShare;
+    }
+
+    public void setUserShare(UserShare userShare) {
+        this.userShare = userShare;
     }
 }
