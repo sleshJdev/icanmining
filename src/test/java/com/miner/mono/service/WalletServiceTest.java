@@ -1,34 +1,16 @@
 package com.miner.mono.service;
 
 import com.miner.mono.dto.WalletDto;
-import org.flywaydb.test.FlywayTestExecutionListener;
-import org.flywaydb.test.annotation.FlywayTest;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
-import static org.springframework.test.context.TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-@Transactional
-@TestExecutionListeners(
-        listeners = {
-                DependencyInjectionTestExecutionListener.class,
-                FlywayTestExecutionListener.class},
-        mergeMode = MERGE_WITH_DEFAULTS)
-@FlywayTest(invokeCleanDB = false)
-public class WalletServiceTest {
+public class WalletServiceTest extends AbstractServiceTest {
     @Autowired
     private WalletService walletService;
 
@@ -56,7 +38,7 @@ public class WalletServiceTest {
     }
 
     @Test
-    public void withdrawalBitcoin() {
+    public void withdrawal() {
         WalletDto wallet0 = walletService.findWallet();
         assertThat(wallet0.getBalance(), comparesEqualTo(BigDecimal.ZERO));
 

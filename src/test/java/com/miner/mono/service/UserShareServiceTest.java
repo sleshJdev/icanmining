@@ -4,17 +4,9 @@ import com.miner.mono.dto.ApplicationUserDto;
 import com.miner.mono.dto.UserProfitItem;
 import com.miner.mono.dto.UserShareRequest;
 import com.miner.mono.security.Credentials;
-import org.flywaydb.test.FlywayTestExecutionListener;
-import org.flywaydb.test.annotation.FlywayTest;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,18 +14,8 @@ import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
-import static org.springframework.test.context.TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-@Transactional
-@TestExecutionListeners(
-        listeners = {
-                DependencyInjectionTestExecutionListener.class,
-                FlywayTestExecutionListener.class},
-        mergeMode = MERGE_WITH_DEFAULTS)
-@FlywayTest(invokeCleanDB = false)
-public class UserShareServiceTest {
+public class UserShareServiceTest extends AbstractServiceTest {
     @Autowired
     private WalletService walletService;
     @Autowired
