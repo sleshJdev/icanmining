@@ -49,9 +49,9 @@ public class PayoutService {
     public PayoutDto approvePayout(long payoutId) {
         LocalDateTime now = ZonedDateTime.now(ZoneOffset.UTC).toLocalDateTime();
         Payout payout = payoutRepository.findOne(payoutId);
-        UserProfitItem userProfitItem = userShareRepository.calculateUserProfit(payout.getUser().getId());
-        userShareRepository.reset(userProfitItem.getId(), now);
-        walletRepository.withdrawal(userProfitItem.getProfit());
+        Long userId = payout.getUser().getId();
+        UserProfitItem userProfitItem = userShareRepository.calculateUserProfit(userId);
+        userShareRepository.reset(userId, now);
         payout.setAmount(userProfitItem.getProfit());
         payout.setCloseDate(now);
         Payout approvedPayout = payoutRepository.save(payout);

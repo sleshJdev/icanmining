@@ -80,16 +80,9 @@ public class PayoutServiceTest extends AbstractServiceTest {
 
         List<UserProfitItem> userProfitItemsAfterPayout = userShareService.calculateProfits();
         assertThat(userProfitItemsAfterPayout, hasSize(3));
-        userProfitItemsAfterPayout.stream()
-                .filter(it -> it.getId() == user1.getId())
-                .findAny().ifPresent(it -> {
-            assertThat(it.getProfit(), comparesEqualTo(BigDecimal.ZERO));
-            userProfitItemsAfterPayout.remove(it);
-        });
-
-        assertThat(userProfitItemsAfterPayout, hasSize(2));
-        assertThat(userProfitItemsAfterPayout.get(0).getProfit(), comparesEqualTo(userShare2.getShare()));
-        assertThat(userProfitItemsAfterPayout.get(1).getProfit(), comparesEqualTo(userShare3.getShare()));
+        assertThat(userProfitItemsAfterPayout.get(0).getProfit(), comparesEqualTo(BigDecimal.ZERO));
+        assertThat(userProfitItemsAfterPayout.get(1).getProfit(), comparesEqualTo(userShare2.getShare()));
+        assertThat(userProfitItemsAfterPayout.get(2).getProfit(), comparesEqualTo(userShare3.getShare()));
     }
 
     @Test

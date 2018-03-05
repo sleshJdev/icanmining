@@ -11,7 +11,7 @@ public class Payout {
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     private ApplicationUser user;
-    @Column(nullable = false, updatable = false, precision = 19, scale = 15)
+    @Column(nullable = false, precision = 19, scale = 15)
     private BigDecimal amount;
     @Column(nullable = false, updatable = false)
     private LocalDateTime issueDate;
