@@ -23,6 +23,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.hamcrest.Matchers.*;
@@ -78,7 +79,7 @@ public class UpdateServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void updateBalance() {
+    public void updateBalance() throws InterruptedException {
         BigDecimal[] balances = {
                 BigDecimal.valueOf(1.3D),
                 BigDecimal.valueOf(0.3D),
@@ -95,8 +96,12 @@ public class UpdateServiceTest extends AbstractServiceTest {
                         ).getBytes(StandardCharsets.UTF_8),
                         HttpStatus.OK));
 
+        //TODO: TimeUnit.SECONDS.sleep(1); -
+        //TODO: rework sql query or find a way how to prevent none unique result by max(date)
         updateService.updateBalance();
+        TimeUnit.SECONDS.sleep(1);
         updateService.updateBalance();
+        TimeUnit.SECONDS.sleep(1);
         updateService.updateBalance();
 
         List<WalletStat> walletStats = walletStatRepository.findAll();
