@@ -18,8 +18,6 @@ public class Wallet {
     private String address;
     @Column(nullable = false, precision = 19, scale = 15)
     private BigDecimal balance;
-    @Column(nullable = false, precision = 19, scale = 15)
-    private BigDecimal withdrawnBtc;
 
     public Wallet() {
     }
@@ -51,13 +49,5 @@ public class Wallet {
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
-    }
-
-    public BigDecimal getWithdrawnBtc() {
-        return withdrawnBtc;
-    }
-
-    public void setWithdrawnBtc(BigDecimal withdrawnBtc) {
-        this.withdrawnBtc = withdrawnBtc;
     }
 }

@@ -5,9 +5,23 @@ import com.miner.mono.dto.UserProfitItem;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
-import static com.miner.mono.persistence.model.UserShare.USER_SHARE_MAPPING_NAME;
+import static com.miner.mono.persistence.repository.UserShareRepository.*;
 
+
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name = CALCULATE_USERS_PROFIT_QUERY_NAME,
+                query = CALCULATE_USERS_PROFIT_QUERY,
+                resultSetMapping = USER_SHARE_MAPPING_NAME
+        ),
+        @NamedNativeQuery(
+                name = CALCULATE_USER_PROFIT_QUERY_NAME,
+                query = CALCULATE_USER_PROFIT_QUERY,
+                resultSetMapping = USER_SHARE_MAPPING_NAME
+        )
+})
 @SqlResultSetMapping(
         name = USER_SHARE_MAPPING_NAME,
         classes = @ConstructorResult(
@@ -16,17 +30,16 @@ import static com.miner.mono.persistence.model.UserShare.USER_SHARE_MAPPING_NAME
                         @ColumnResult(name = "id", type = Long.class),
                         @ColumnResult(name = "username", type = String.class),
                         @ColumnResult(name = "profit", type = BigDecimal.class),
-                        @ColumnResult(name = "active", type = Boolean.class)
+                        @ColumnResult(name = "last_contribution_date", type = Date.class)
                 }
         )
 )
 @Entity
 public class UserShare {
-    public static final String USER_SHARE_MAPPING_NAME = "UserShareItem";
     @Id
+    @GeneratedValue
     private Long id;
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private ApplicationUser user;
     @Column(nullable = false, precision = 19, scale = 15)
     private BigDecimal share;

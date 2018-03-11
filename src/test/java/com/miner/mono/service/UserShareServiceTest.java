@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -22,6 +21,8 @@ public class UserShareServiceTest extends AbstractServiceTest {
     private ApplicationUserService applicationUserService;
     @Autowired
     private UserShareService userShareService;
+    @Autowired
+    private PayoutService payoutService;
 
     private ApplicationUserDto user1, user2;
 
@@ -31,10 +32,12 @@ public class UserShareServiceTest extends AbstractServiceTest {
         user1 = applicationUserService.saveUser(new Credentials("user1", "password"));
         user2 = applicationUserService.saveUser(new Credentials("user2", "password"));
 
-        UserShareRequest userProfit1 = new UserShareRequest(BigDecimal.valueOf(TimeUnit.DAYS.toSeconds(1)), BigDecimal.ONE);
-        UserShareRequest userProfit2 = new UserShareRequest(BigDecimal.valueOf(TimeUnit.DAYS.toSeconds(9)), BigDecimal.ONE);
+        UserShareRequest userProfit1 = new UserShareRequest(DAY_MINING_INTERVAL, BigDecimal.ONE);
+        UserShareRequest userProfit2 = new UserShareRequest(DAY_MINING_INTERVAL, BigDecimal.valueOf(4.5D));
+        UserShareRequest userProfit3 = new UserShareRequest(DAY_MINING_INTERVAL, BigDecimal.valueOf(4.5D));
         userShareService.contribute(user1, userProfit1);
         userShareService.contribute(user2, userProfit2);
+        userShareService.contribute(user2, userProfit3);
     }
 
     @Test
@@ -51,21 +54,6 @@ public class UserShareServiceTest extends AbstractServiceTest {
         assertThat(userProfitItems, hasSize(2));
         assertUserProfit(userProfitItems.get(0), user1, BigDecimal.valueOf(1L));
         assertUserProfit(userProfitItems.get(1), user2, BigDecimal.valueOf(9L));
-    }
-
-    @Test
-    public void distributeWithWalletWithdrawal() {
-        List<UserProfitItem> userProfitItems = userShareService.calculateProfits();
-        assertThat(userProfitItems, hasSize(2));
-        assertUserProfit(userProfitItems.get(0), user1, BigDecimal.valueOf(1L));
-        assertUserProfit(userProfitItems.get(1), user2, BigDecimal.valueOf(9L));
-
-        walletService.withdrawal(BigDecimal.valueOf(5L));
-
-        List<UserProfitItem> usersProfitAfterWithdrawal = userShareService.calculateProfits();
-        assertThat(usersProfitAfterWithdrawal, hasSize(2));
-        assertUserProfit(usersProfitAfterWithdrawal.get(0), user1, BigDecimal.valueOf(1L));
-        assertUserProfit(usersProfitAfterWithdrawal.get(1), user2, BigDecimal.valueOf(9L));
     }
 
     private void assertUserProfit(UserProfitItem userProfit, ApplicationUserDto user, BigDecimal profit) {

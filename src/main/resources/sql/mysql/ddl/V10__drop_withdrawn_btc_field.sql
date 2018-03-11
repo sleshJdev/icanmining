@@ -1,0 +1,1 @@
+ALTER TABLE wallet DROP COLUMN withdrawn_btc;

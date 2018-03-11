@@ -1,52 +1,40 @@
 package com.miner.mono.dto;
 
+import org.springframework.data.convert.Jsr310Converters.DateToLocalDateTimeConverter;
+
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class UserProfitItem {
-    private long id;
-    private String username;
-    private BigDecimal profit;
-    private boolean active;
+    private final long id;
+    private final String username;
+    private final BigDecimal profit;
+    private final LocalDateTime lastContributionDate;
 
-    public UserProfitItem() {
-    }
-
-    public UserProfitItem(long id, String username, BigDecimal profit, boolean active) {
+    public UserProfitItem(long id,
+                          String username,
+                          BigDecimal profit,
+                          Date lastContributionDate) {
         this.id = id;
         this.username = username;
         this.profit = profit;
-        this.active = active;
+        this.lastContributionDate = DateToLocalDateTimeConverter.INSTANCE.convert(lastContributionDate);
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public BigDecimal getProfit() {
         return profit;
     }
 
-    public void setProfit(BigDecimal profit) {
-        this.profit = profit;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
+    public LocalDateTime getLastContributionDate() {
+        return lastContributionDate;
     }
 }

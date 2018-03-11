@@ -41,15 +41,9 @@ public class WalletService {
         return toDto(updatedWallet);
     }
 
-    @Transactional(isolation = Isolation.SERIALIZABLE)
-    public WalletDto withdrawal(BigDecimal amountBtc) {
-        walletRepository.withdrawal(amountBtc);
-        return findWallet();
-    }
-
     private WalletDto toDto(Wallet wallet) {
         ExchangeRate usdRate = exchangeRateRepository.findByCurrency(Currency.USD);
         BigDecimal usdAmount = wallet.getBalance().multiply(usdRate.getRate());
-        return new WalletDto(wallet.getAddress(), wallet.getBalance(), wallet.getWithdrawnBtc(), usdAmount);
+        return new WalletDto(wallet.getAddress(), wallet.getBalance(), usdAmount);
     }
 }
