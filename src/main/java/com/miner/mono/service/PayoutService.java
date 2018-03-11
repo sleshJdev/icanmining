@@ -14,11 +14,9 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import java.util.List;
 
+import static com.miner.mono.util.TimeUtils.utcNowDateTime;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
 
@@ -41,7 +39,7 @@ public class PayoutService {
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public PayoutDto createPayout(long userId, BigDecimal amountBtc) {
-        if(amountBtc.compareTo(BigDecimal.ZERO) <= 0) {
+        if (amountBtc.compareTo(BigDecimal.ZERO) <= 0) {
             throw new InsufficientFundsException("Payout amount should be great than zero.");
         }
         if (amountBtc.compareTo(minPayout) < 0) {
@@ -57,15 +55,14 @@ public class PayoutService {
                             amountBtc.doubleValue()));
         }
         ApplicationUser user = applicationUserRepository.findOne(userId);
-        LocalDateTime issueDate = ZonedDateTime.now(ZoneOffset.UTC).toLocalDateTime();
-        Payout payout = payoutRepository.save(new Payout(user, amountBtc, issueDate));
+        Payout payout = payoutRepository.save(new Payout(user, amountBtc, utcNowDateTime()));
         return toDto(payout);
     }
 
     @Transactional
     public PayoutDto approvePayout(long payoutId) {
         Payout payout = payoutRepository.findOne(payoutId);
-        payout.setCloseDate(ZonedDateTime.now(ZoneOffset.UTC).toLocalDateTime());
+        payout.setCloseDate(utcNowDateTime());
         Payout approvedPayout = payoutRepository.save(payout);
         return toDto(approvedPayout);
     }
@@ -80,7 +77,7 @@ public class PayoutService {
     public PayoutDto cancelPayout(long id) {
         Payout payout = payoutRepository.findOne(id);
         payout.setCanceled(true);
-        payout.setCloseDate(ZonedDateTime.now(ZoneOffset.UTC).toLocalDateTime());
+        payout.setCloseDate(utcNowDateTime());
         Payout canceledPayout = payoutRepository.save(payout);
         return toDto(canceledPayout);
     }

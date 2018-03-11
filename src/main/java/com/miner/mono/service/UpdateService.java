@@ -27,6 +27,8 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import static com.miner.mono.util.TimeUtils.utcNowDateTime;
+
 @Service
 public class UpdateService {
     private final String walletStatsUrlFormat;
@@ -88,7 +90,6 @@ public class UpdateService {
                     .map(JsonNode::asText)
                     .map(BigDecimal::new)
                     .reduce(BigDecimal.ZERO, BigDecimal::add, BigDecimal::add);
-            LocalDateTime now = ZonedDateTime.now(ZoneOffset.UTC).toLocalDateTime();
 
             WalletStat lastStat = walletStatRepository.findLastStat();
             BigDecimal lastBalance = Optional.ofNullable(lastStat)
@@ -101,7 +102,7 @@ public class UpdateService {
                 walletRepository.save(wallet);
             }
 
-            walletStatRepository.save(new WalletStat(wallet, balance, now, json));
+            walletStatRepository.save(new WalletStat(wallet, balance, utcNowDateTime(), json));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

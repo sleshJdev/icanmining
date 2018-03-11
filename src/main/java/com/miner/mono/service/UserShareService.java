@@ -12,11 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static com.miner.mono.util.TimeUtils.utcNowDateTime;
 
 @Service
 public class UserShareService {
@@ -35,8 +34,7 @@ public class UserShareService {
         BigDecimal miningInterval = shareRequest.getMiningInterval();
         BigDecimal share = shareRequest.getShare();
         BigDecimal delta = share.multiply(miningInterval).divide(DAY_SECONDS, 15, RoundingMode.HALF_DOWN);
-        LocalDateTime now = ZonedDateTime.now(ZoneOffset.UTC).toLocalDateTime();
-        userShareRepository.save(new UserShare(user, delta, now));
+        userShareRepository.save(new UserShare(user, delta, utcNowDateTime()));
     }
 
     @Transactional(readOnly = true)
