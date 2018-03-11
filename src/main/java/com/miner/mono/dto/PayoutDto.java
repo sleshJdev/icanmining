@@ -7,6 +7,7 @@ public class PayoutDto {
     private Long id;
     private long userId;
     private BigDecimal amount;
+    private BigDecimal fee;
     private LocalDateTime issueDate;
     private LocalDateTime closeDate;
     private boolean canceled;
@@ -14,12 +15,14 @@ public class PayoutDto {
     public PayoutDto() {
     }
 
-    public PayoutDto(Long id, long userId, BigDecimal amount,
+    public PayoutDto(Long id, long userId,
+                     BigDecimal amount, BigDecimal fee,
                      LocalDateTime issueDate, LocalDateTime closeDate,
                      boolean canceled) {
         this.id = id;
         this.userId = userId;
         this.amount = amount;
+        this.fee = fee;
         this.issueDate = issueDate;
         this.closeDate = closeDate;
         this.canceled = canceled;
@@ -47,6 +50,22 @@ public class PayoutDto {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public BigDecimal getFee() {
+        return fee;
+    }
+
+    public void setFee(BigDecimal fee) {
+        this.fee = fee;
     }
 
     public LocalDateTime getIssueDate() {

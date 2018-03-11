@@ -13,6 +13,8 @@ public class Payout {
     private ApplicationUser user;
     @Column(nullable = false, precision = 19, scale = 15)
     private BigDecimal amount;
+    @Column(nullable = false, precision = 19, scale = 15)
+    private BigDecimal fee;
     @Column(nullable = false, updatable = false)
     private LocalDateTime issueDate;
     @Column(insertable = false)
@@ -23,9 +25,12 @@ public class Payout {
     public Payout() {
     }
 
-    public Payout(ApplicationUser user, BigDecimal amount, LocalDateTime issueDate) {
+    public Payout(ApplicationUser user,
+                  BigDecimal amount, BigDecimal fee,
+                  LocalDateTime issueDate) {
         this.user = user;
         this.amount = amount;
+        this.fee = fee;
         this.issueDate = issueDate;
     }
 
@@ -51,6 +56,14 @@ public class Payout {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public BigDecimal getFee() {
+        return fee;
+    }
+
+    public void setFee(BigDecimal fee) {
+        this.fee = fee;
     }
 
     public LocalDateTime getIssueDate() {

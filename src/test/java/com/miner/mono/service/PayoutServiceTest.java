@@ -34,6 +34,9 @@ public class PayoutServiceTest extends AbstractServiceTest {
     private UserShareService userShareService;
     @Value("${app.core.min_payout}")
     private BigDecimal minPayout;
+    @Value("${app.core.fee_percents}")
+    private BigDecimal feePercents;
+    private BigDecimal fee;
     private ApplicationUserDto user1, user2, user3;
 
     @Before
@@ -42,6 +45,7 @@ public class PayoutServiceTest extends AbstractServiceTest {
         user1 = applicationUserService.saveUser(new Credentials("user1", "password"));
         user2 = applicationUserService.saveUser(new Credentials("user2", "password"));
         user3 = applicationUserService.saveUser(new Credentials("user3", "password"));
+        fee = feePercents.movePointLeft(2);
     }
 
     @Test
@@ -52,9 +56,15 @@ public class PayoutServiceTest extends AbstractServiceTest {
         BigDecimal profit = userProfit.getProfit();
         assertThat(profit, comparesEqualTo(WALLET_BALANCE));
 
-        PayoutDto payout = payoutService.createPayout(user1.getId(), BigDecimal.ONE);
+        BigDecimal amountBtc = BigDecimal.ONE;
+        BigDecimal feeAmount = amountBtc.multiply(fee);
+        BigDecimal actualAmount = amountBtc.subtract(feeAmount);
+        PayoutDto payout = payoutService.createPayout(user1.getId(), amountBtc);
+        assertThat(payout.getAmount(), comparesEqualTo(actualAmount));
+        assertThat(payout.getFee(), comparesEqualTo(feeAmount));
+
         UserProfitItem userProfitAfterPayout = userShareService.calculateProfit(user1.getId());
-        assertThat(userProfitAfterPayout.getProfit(), comparesEqualTo(profit.subtract(payout.getAmount())));
+        assertThat(userProfitAfterPayout.getProfit(), comparesEqualTo(profit.subtract(amountBtc)));
     }
 
     @Test
@@ -66,14 +76,10 @@ public class PayoutServiceTest extends AbstractServiceTest {
         assertThat(payout.getIssueDate(), notNullValue());
         assertThat(payout.getCloseDate(), nullValue());
         assertFalse(payout.isCanceled());
-        assertThat(payout.getAmount(), comparesEqualTo(BigDecimal.ONE));
 
         PayoutDto approvedPayout = payoutService.approvePayout(payout.getId());
         assertThat(approvedPayout.getCloseDate(), notNullValue());
         assertFalse(approvedPayout.isCanceled());
-
-        UserProfitItem userProfitItem = userShareService.calculateProfit(user1.getId());
-        assertThat(userProfitItem.getProfit(), comparesEqualTo(WALLET_BALANCE.subtract(approvedPayout.getAmount())));
     }
 
     @Test
@@ -102,9 +108,11 @@ public class PayoutServiceTest extends AbstractServiceTest {
         Map<Long, UserProfitItem> userProfitItemsAfterPayout = userShareService.calculateProfits()
                 .stream().collect(toMap(UserProfitItem::getId, Function.identity()));
         assertThat(userProfitItemsAfterPayout.entrySet(), hasSize(3));
-        assertThat(userProfitItemsAfterPayout.get(user1.getId()).getProfit(), comparesEqualTo(profit1.subtract(payout1.getAmount())));
+        assertThat(userProfitItemsAfterPayout.get(user1.getId()).getProfit(),
+                comparesEqualTo(profit1.subtract(payout1.getAmount().add(payout1.getFee()))));
         assertThat(userProfitItemsAfterPayout.get(user2.getId()).getProfit(), comparesEqualTo(profit2));
-        assertThat(userProfitItemsAfterPayout.get(user3.getId()).getProfit(), comparesEqualTo(profit3.subtract(payout3.getAmount())));
+        assertThat(userProfitItemsAfterPayout.get(user3.getId()).getProfit(),
+                comparesEqualTo(profit3.subtract(payout3.getAmount().add(payout3.getFee()))));
     }
 
     @Test

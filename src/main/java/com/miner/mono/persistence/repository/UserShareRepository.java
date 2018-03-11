@@ -25,13 +25,15 @@ public interface UserShareRepository extends JpaRepository<UserShare, Long> {
             "          max(us.last_contribution_date) AS last_contribution_date " +
             "   FROM user_share AS us " +
             "   GROUP BY us.user_id) AS u " +
-            "INNER JOIN application_user AS a ON u.user_id = a.id " +
+            "INNER JOIN application_user AS a " +
+            "   ON u.user_id = a.id " +
             "LEFT JOIN " +
             "  (SELECT user_id AS user_id, " +
-            "          sum(amount) AS user_total_payout " +
+            "          sum(amount + fee) AS user_total_payout " +
             "   FROM payout " +
             "   WHERE canceled = FALSE " +
-            "   GROUP BY user_id) p ON p.user_id = u.user_id, " +
+            "   GROUP BY user_id) p " +
+            "       ON p.user_id = u.user_id, " +
             "  (SELECT SUM(share) AS total_share " +
             "   FROM user_share) AS ts, " +
             "  (SELECT balance AS balance " +

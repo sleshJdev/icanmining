@@ -26,15 +26,18 @@ public class PayoutService {
     private final ApplicationUserRepository applicationUserRepository;
     private final PayoutRepository payoutRepository;
     private final BigDecimal minPayout;
+    private final BigDecimal fee;
 
     public PayoutService(UserShareRepository userShareRepository,
                          ApplicationUserRepository applicationUserRepository,
                          PayoutRepository payoutRepository,
-                         @Value("${app.core.min_payout}") BigDecimal minPayout) {
+                         @Value("${app.core.min_payout}") BigDecimal minPayout,
+                         @Value("${app.core.fee_percents}") BigDecimal feePercents) {
         this.userShareRepository = userShareRepository;
         this.applicationUserRepository = applicationUserRepository;
         this.payoutRepository = payoutRepository;
         this.minPayout = minPayout;
+        this.fee = feePercents.movePointLeft(2);
     }
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
@@ -44,18 +47,22 @@ public class PayoutService {
         }
         if (amountBtc.compareTo(minPayout) < 0) {
             throw new InsufficientFundsException(
-                    String.format("Insufficient funds. You need have minimal %f BTC to withdrawal.",
+                    String.format(
+                            "Insufficient funds. You need have minimal %f BTC to withdrawal.",
                             minPayout.doubleValue()));
         }
         UserProfitItem userProfitItem = userShareRepository.calculateUserProfit(userId);
         BigDecimal userProfit = ofNullable(userProfitItem).map(UserProfitItem::getProfit).orElse(BigDecimal.ZERO);
         if (amountBtc.compareTo(userProfit) > 0) {
             throw new InsufficientFundsException(
-                    String.format("Insufficient funds. It is not enough funds for withdrawal %f BTC.",
+                    String.format(
+                            "Insufficient funds. It is not enough funds for withdrawal %f BTC.",
                             amountBtc.doubleValue()));
         }
+        BigDecimal feeAmount = amountBtc.multiply(fee);
+        BigDecimal actualAmount = amountBtc.subtract(feeAmount);
         ApplicationUser user = applicationUserRepository.findOne(userId);
-        Payout payout = payoutRepository.save(new Payout(user, amountBtc, utcNowDateTime()));
+        Payout payout = payoutRepository.save(new Payout(user, actualAmount, feeAmount, utcNowDateTime()));
         return toDto(payout);
     }
 
@@ -93,6 +100,7 @@ public class PayoutService {
                 payout.getId(),
                 payout.getUser().getId(),
                 payout.getAmount(),
+                payout.getFee(),
                 payout.getIssueDate(),
                 payout.getCloseDate(),
                 payout.isCanceled());
