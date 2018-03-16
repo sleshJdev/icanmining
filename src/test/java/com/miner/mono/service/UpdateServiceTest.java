@@ -8,7 +8,6 @@ import com.miner.mono.persistence.model.WalletStat;
 import com.miner.mono.persistence.repository.ExchangeRateRepository;
 import com.miner.mono.persistence.repository.WalletStatRepository;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,12 +25,15 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.miner.mono.service.UpdateService.ADDR_PARAM;
+import static java.util.Collections.singletonMap;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.client.ExpectedCount.times;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
+import static org.springframework.web.util.UriComponentsBuilder.fromHttpUrl;
 
 
 @AutoConfigureWebClient(registerRestTemplate = true)
@@ -54,9 +56,11 @@ public class UpdateServiceTest extends AbstractServiceTest {
     private String walletStatsUrl;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         walletService.updateBalance(BigDecimal.ZERO);
-        walletStatsUrl = String.format(walletStatsUrlFormat, walletService.findWalletAddress());
+        walletStatsUrl = fromHttpUrl(walletStatsUrlFormat)
+                .buildAndExpand(singletonMap(ADDR_PARAM, walletService.findWalletAddress()))
+                .toUriString();
     }
 
     @Test

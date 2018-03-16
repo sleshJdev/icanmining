@@ -21,16 +21,21 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URI;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import static com.miner.mono.util.TimeUtils.utcNowDateTime;
+import static java.util.Collections.singletonMap;
+import static org.springframework.web.util.UriComponentsBuilder.fromHttpUrl;
 
 @Service
 public class UpdateService {
+    public static final String ADDR_PARAM = "addr";
+    public static final String RESULT_PROPERTY = "result";
+    public static final String PAYMENTS_PROPERTY = "payments";
+    public static final String AMOUNT_PROPERTY = "amount";
+    public static final String EXCHANGES_PROPERTY = "exchanges";
+    public static final String COIN_PROPERTY = "coin";
     private final String walletStatsUrlFormat;
     private final String infoUrl;
     private final WalletRepository walletRepository;
@@ -56,16 +61,14 @@ public class UpdateService {
     @Transactional
     public void updateExchangeRate() {
         try {
-            ResponseEntity<String> exchange = restTemplate.exchange(
-                    new RequestEntity<>(HttpMethod.GET, URI.create(infoUrl)), String.class);
-            ArrayNode exchanges = (ArrayNode) objectMapper.readTree(exchange.getBody())
-                    .get("result").get("exchanges");
+            ArrayNode exchanges = (ArrayNode) objectMapper.readTree(doGet(URI.create(infoUrl)))
+                    .get(RESULT_PROPERTY).get(EXCHANGES_PROPERTY);
             for (ExchangeRate exchangeRate : exchangeRateRepository.findAll()) {
                 for (int i = 0; i < exchanges.size(); i++) {
                     ObjectNode rate = (ObjectNode) exchanges.get(i);
                     String currency = exchangeRate.getCurrency().name();
                     String coin = exchangeRate.getCoin().name();
-                    if (rate.has(currency) && rate.get("coin").asText().equals(coin)) {
+                    if (rate.has(currency) && rate.get(COIN_PROPERTY).asText().equals(coin)) {
                         exchangeRate.setRate(new BigDecimal(rate.get(currency).asText()));
                         exchangeRateRepository.save(exchangeRate);
                     }
@@ -80,12 +83,11 @@ public class UpdateService {
     public void updateBalance() {
         try {
             Wallet wallet = walletRepository.findWallet();
-            String url = String.format(walletStatsUrlFormat, wallet.getAddress());
-            ResponseEntity<String> exchange = restTemplate.exchange(
-                    new RequestEntity<>(HttpMethod.GET, URI.create(url)), String.class);
-            String json = exchange.getBody();
+            String json = doGet(fromHttpUrl(walletStatsUrlFormat)
+                    .buildAndExpand(singletonMap(ADDR_PARAM, wallet.getAddress()))
+                    .toUri());
             List<JsonNode> balances = objectMapper.readTree(json)
-                    .get("result").get("payments").findValues("amount");
+                    .get(RESULT_PROPERTY).get(PAYMENTS_PROPERTY).findValues(AMOUNT_PROPERTY);
             BigDecimal balance = balances.stream()
                     .map(JsonNode::asText)
                     .map(BigDecimal::new)
@@ -106,5 +108,11 @@ public class UpdateService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String doGet(URI url) {
+        ResponseEntity<String> exchange = restTemplate.exchange(
+                new RequestEntity<>(HttpMethod.GET, url), String.class);
+        return exchange.getBody();
     }
 }
