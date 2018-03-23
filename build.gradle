@@ -1,16 +1,17 @@
 buildscript {
-	ext {
-		springBootVersion = '1.5.9.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+    ext {
+        springBootVersion = '1.5.9.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
 apply plugin: 'java'
+apply plugin: 'war'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
@@ -19,23 +20,40 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-security')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('mysql:mysql-connector-java')
-	compile('com.zaxxer:HikariCP:2.7.8')
-	compile('com.auth0:java-jwt:3.1.0')
-	compile "org.flywaydb:flyway-core:5.0.7"
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile('org.springframework.security:spring-security-test')
-	testCompile('org.flywaydb.flyway-test-extensions:flyway-spring-test:5.0.0')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('mysql:mysql-connector-java:5.1.44')
+    compile('com.zaxxer:HikariCP:2.7.8')
+    compile('com.auth0:java-jwt:3.1.0')
+    compile('org.flywaydb:flyway-core:5.0.7')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.security:spring-security-test')
+    testCompile('org.flywaydb.flyway-test-extensions:flyway-spring-test:5.0.0')
 }
 
-task copyResource(type: Copy) {
-    from './client/dist'
-    into './src/main/resources/static'
+task buildClient() {
+    exec {
+        workingDir './client'
+        executable 'yarn'
+        args 'run', 'build'
+    }
+    delete './src/main/resources/public'
+    copy {
+        from './client/dist'
+        into './src/main/resources/public'
+    }
+}
+
+tasks.war.dependsOn buildClient
+
+task dockerAppBuild(type: Exec, dependsOn: war) {
+    executable 'docker'
+    args 'build'
+    args '--build-arg', "app_file=${jar.archivePath}"
+    args '-t', 'icanmining', '.'
 }

@@ -1,0 +1,12 @@
+version: '3.1'
+services:
+  db:
+    build: ./db
+    image: icanmining-db-mysql
+  app:
+    build: .
+    image: icanmining
+    depends_on:
+      - icanmining-db-mysql
+
+
