@@ -1,1 +1,15 @@
-!build/**/*
+.gradle/*
+.idea/*
+client/*
+db/*
+docs/*
+gradle/*
+out/*
+redesign/*
+src/*
+test/*
+*.gradle
+*.yml
+*.iml
+.gitignore
+!build/libs/*

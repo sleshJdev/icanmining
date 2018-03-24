@@ -3,10 +3,12 @@ package com.miner.mono.config;
 import com.miner.mono.security.AuthenticationProperties;
 import com.miner.mono.security.JwtAuthenticationEntryPoint;
 import com.miner.mono.security.JwtAuthorizationFilter;
+import com.miner.mono.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -31,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     public WebSecurityConfig(@Value("${security.password.strength}") int strength,
                              AuthenticationProperties authenticationProperties,
-                             UserDetailsService userDetailsService,
+                             UserDetailsServiceImpl userDetailsService,
                              JwtAuthorizationFilter jwtAuthorizationFilter,
                              JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint) {
         this.strength = strength;
@@ -44,10 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
+                .antMatchers(HttpMethod.POST, authenticationProperties.getSignInUrl()).permitAll()
+                .antMatchers(HttpMethod.POST, authenticationProperties.getSignInUrl()).permitAll()
+                .antMatchers("/api/**").authenticated()
+                .antMatchers(HttpMethod.GET, "/**").permitAll()
                 .anyRequest().authenticated()
-                .antMatchers(HttpMethod.POST, authenticationProperties.getSignInUrl()).permitAll()
-                .antMatchers(HttpMethod.POST, authenticationProperties.getSignInUrl()).permitAll()
-                .antMatchers(HttpMethod.GET, "/").permitAll()
                 .and()
                 .logout()
                 .logoutSuccessUrl(authenticationProperties.getSignOutSuccessRedirectUrl())
@@ -61,6 +64,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Bean

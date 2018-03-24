@@ -20,6 +20,9 @@ public class WalletStat {
     @Column(nullable = false)
     private String json;
 
+    public WalletStat() {
+    }
+
     public WalletStat(Wallet wallet, BigDecimal balance, LocalDateTime date, String json) {
         this.wallet = wallet;
         this.balance = balance;

@@ -37,23 +37,35 @@ dependencies {
 }
 
 task buildClient() {
-    exec {
-        workingDir './client'
-        executable 'yarn'
-        args 'run', 'build'
-    }
-    delete './src/main/resources/public'
-    copy {
-        from './client/dist'
-        into './src/main/resources/public'
+    doLast {
+        exec {
+            workingDir './client'
+            executable 'yarn'
+            args 'run', 'build'
+        }
+        delete './src/main/webapp'
+        copy {
+            from './client/dist'
+            into './src/main/webapp'
+        }
     }
 }
 
 tasks.war.dependsOn buildClient
 
-task dockerAppBuild(type: Exec, dependsOn: war) {
-    executable 'docker'
+task dockerBuild(type: Exec, dependsOn: war) {
+    def appFile = rootDir.toURI().relativize(war.archivePath.toURI())
+    //actually, the current configuration works only for 'prod' profile
+    //todo: investigate how fix the configuration
+    def profile = getProperty('profile') ?: 'dev';
+    println("profile: ${profile}, appFile: ${appFile}")
+    executable 'docker-compose'
     args 'build'
-    args '--build-arg', "app_file=${jar.archivePath}"
-    args '-t', 'icanmining', '.'
+    args '--build-arg', "app_file=${appFile}"
+    args '--build-arg', "app_profile=${profile}"
+}
+
+task dockerUp(type: Exec, dependsOn: dockerBuild) {
+    executable 'docker-compose'
+    args 'up'
 }
