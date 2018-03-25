@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('mono-client App', () => {
+describe('icanmining App', () => {
   let page: AppPage;
 
   beforeEach(() => {

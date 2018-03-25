@@ -5,8 +5,8 @@ services:
       context: ./db/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: monominer
-      MYSQL_PASSWORD: \#mOnOmIner789
+      MYSQL_USER: icanmining
+      MYSQL_PASSWORD: icanmining
     container_name: icanmining-db
     ports:
       - 3306:3306
