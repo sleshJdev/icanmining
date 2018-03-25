@@ -57,7 +57,7 @@ task dockerBuild(type: Exec, dependsOn: war) {
     def appFile = rootDir.toURI().relativize(war.archivePath.toURI())
     //actually, the current configuration works only for 'prod' profile
     //todo: investigate how fix the configuration
-    def profile = findProperty('profile') ?: 'dev';
+    def profile = findProperty('profile') ?: 'prod';
     println("profile: ${profile}, appFile: ${appFile}")
     executable 'docker-compose'
     args 'build'
