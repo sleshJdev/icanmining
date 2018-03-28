@@ -1,15 +1,11 @@
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import "./assets/stylesheets/color.css";
+@import "./assets/stylesheets/text.css";
+@import "./assets/stylesheets/button.css";
+@import "./assets/stylesheets/form.css";
 
-.form-container {
-  display: flex;
-  justify-content: center;
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
 }
 
-.form-container .form {
-  display: inline-block;
-}
-
-.panel {
-  padding: 2em 5em;
-  margin: 1em;
-}

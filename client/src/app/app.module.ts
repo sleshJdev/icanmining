@@ -18,6 +18,8 @@ import {InfoModalComponent} from './common/modal/info-modal/info-modal.component
 import { UsersComponent } from './components/users/users.component';
 import { WalletComponent } from './components/wallet/wallet.component';
 import { DownloadComponent } from './components/download/download.component';
+import { FooterComponent } from './components/common/footer/footer.component';
+import { SupportComponent } from './components/common/support/support.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { DownloadComponent } from './components/download/download.component';
     InfoModalComponent,
     UsersComponent,
     WalletComponent,
-    DownloadComponent
+    DownloadComponent,
+    FooterComponent,
+    SupportComponent
   ],
   imports: [
     BrowserModule,

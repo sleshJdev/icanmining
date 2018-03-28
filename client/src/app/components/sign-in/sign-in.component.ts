@@ -26,17 +26,18 @@ export class SignInComponent {
   }
 
   signIn() {
-    this.authService.signIn(this.options.value)
-      .subscribe((userDetails) => {
-        this.router.navigateByUrl('/');
-      }, error => {
-        return this.dialog.open(InfoModalComponent, {
-          width: '300px',
-          data: {
-            title: 'Bad credentials',
-            message: `Username or password are incorrect`
-          }
-        }).afterClosed();
-      });
+    this.authService.signIn(this.options.value).subscribe(
+      () => this.router.navigateByUrl('/'),
+      () => this.showError());
+  }
+
+  private showError() {
+    return this.dialog.open(InfoModalComponent, {
+      width: '300px',
+      data: {
+        title: 'Bad credentials',
+        message: `Username or password are incorrect`
+      }
+    }).afterClosed();
   }
 }

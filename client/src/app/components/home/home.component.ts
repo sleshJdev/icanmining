@@ -1,26 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../common/auth.service';
-import {HttpClient} from '@angular/common/http';
-import {UserProfitInfo} from '../../model/user-profit-info';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-  protected userProfitInfo = {};
-
-  constructor(public authService: AuthService,
-              public http: HttpClient) {
-  }
-
-  ngOnInit() {
-    if (this.authService.isAuthorized()) {
-      this.http.get(`/api/profit/user`)
-        .subscribe((response: UserProfitInfo) => {
-          this.userProfitInfo = response;
-        });
-    }
-  }
+export class HomeComponent {
 }

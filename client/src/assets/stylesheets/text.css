@@ -1,0 +1,18 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
+
+:root {
+  --text--less: 0.8em;
+  --text--more: 1.5em;
+}
+
+.text--more {
+  font-size: var(--text--more);
+}
+
+.text--less {
+  font-size: var(--text--less);
+}
+
+.text--center {
+  text-align: center;
+}

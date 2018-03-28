@@ -1,35 +1,17 @@
-<div class="form-container">
-  <form class="form" [formGroup]="options">
-    <div>
-      <h2>Sign In</h2>
-    </div>
-    <div class="form__row">
-      <mat-form-field>
-        <input matInput name="username" formControlName="username">
-        <mat-placeholder>Username</mat-placeholder>
-        <mat-error *ngIf="options.controls.username.hasError('required')">
-          Username is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div class="form__row">
-      <mat-form-field>
-        <input matInput type="password" name="password" formControlName="password">
-        <mat-placeholder>Password</mat-placeholder>
-        <mat-error *ngIf="options.controls.password.hasError('required')">
-          Password is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div class="form__row">
-      <mat-toolbar>
-        <mat-toolbar-row>
-          <button type="submit" color="primary" [disabled]="!options.valid"
-                  mat-raised-button (click)="signIn()">
-            Sign In
-          </button>
-        </mat-toolbar-row>
-      </mat-toolbar>
-    </div>
-  </form>
-</div>
+<form class="form" [formGroup]="options" (onsubmit)="signIn()">
+  <div class="form__row">
+    <input id="username" name="username" formControlName="username" placeholder="Username">
+    <label for="username" *ngIf="options.controls.username.hasError('required')">
+      Username is <strong>required</strong>
+    </label>
+  </div>
+  <div class="form__row">
+    <input id="password" type="password" name="password" formControlName="password" placeholder="Password">
+    <label for="password" *ngIf="options.controls.password.hasError('required')">
+      Password is <strong>required</strong>
+    </label>
+  </div>
+  <div class="form__row">
+    <button type="submit" [disabled]="!options.valid">Sign In</button>
+  </div>
+</form>

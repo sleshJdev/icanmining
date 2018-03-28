@@ -1,0 +1,5 @@
+@import "./color.css";
+
+.from {
+  background-color: var(--white);
+}
