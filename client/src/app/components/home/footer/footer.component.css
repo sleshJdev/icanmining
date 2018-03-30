@@ -1,0 +1,27 @@
+.footer {
+  display: flex;
+}
+
+.brand, .terms {
+  flex-grow: 1;
+  padding: 2em 4em;
+}
+
+.brand {
+  text-align: left;
+  line-height: 4em;
+}
+
+.terms {
+  text-align: right;
+}
+
+.logo {
+  width: 2em;
+  height: 2em;
+}
+
+.network {
+  width: 2em;
+  height: 2em;
+}

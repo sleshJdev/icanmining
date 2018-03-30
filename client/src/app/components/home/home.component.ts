@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {IntoComponent} from "./landing/intro.component";
 
 @Component({
   selector: 'app-home',

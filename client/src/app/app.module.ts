@@ -15,17 +15,18 @@ import {httpInterceptorProviders} from './common/htpp-interceptor';
 import {AuthService} from './common/auth.service';
 import {SignUpComponent} from './components/sign-up/sign-up.component';
 import {InfoModalComponent} from './common/modal/info-modal/info-modal.component';
-import { UsersComponent } from './components/users/users.component';
-import { WalletComponent } from './components/wallet/wallet.component';
-import { DownloadComponent } from './components/download/download.component';
-import { FooterComponent } from './components/common/footer/footer.component';
-import { SupportComponent } from './components/common/support/support.component';
+import {UsersComponent} from './components/users/users.component';
+import {WalletComponent} from './components/wallet/wallet.component';
+import {DownloadComponent} from './components/download/download.component';
+import {FooterComponent} from './components/home/footer/footer.component';
+import {SupportComponent} from './components/home/support/support.component';
+import {CommonModule} from "@angular/common";
+import {HomeModule} from "./components/home/home.module";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     SignInComponent,
     NavComponent,
     SettingsComponent,
@@ -34,8 +35,6 @@ import { SupportComponent } from './components/common/support/support.component'
     UsersComponent,
     WalletComponent,
     DownloadComponent,
-    FooterComponent,
-    SupportComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +43,8 @@ import { SupportComponent } from './components/common/support/support.component'
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    AppRoutesModule
+    AppRoutesModule,
+    HomeModule
   ],
   entryComponents: [
     InfoModalComponent
