@@ -10,11 +10,12 @@ import {Router} from '@angular/router';
 export class NavComponent {
 
   constructor(private router: Router,
-              private authService: AuthService) {
+              public authService: AuthService) {
   }
 
   signOut() {
     this.authService.signOut();
     this.router.navigateByUrl('/');
   }
+
 }
