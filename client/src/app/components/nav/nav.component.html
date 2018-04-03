@@ -1,14 +1,14 @@
 <header>
-  <nav class="nav">
-    <div class="brand">
-      <a routerLink="/">
-        <img src="../../../assets/images/miner.jpg">
-        Icanmining
-      </a>
-    </div>
-    <div class="user" *ngIf="authService.isAuthorized()">
-      Welcome, {{authService.user.username}}!
-    </div>
+  <div class="logo-miner">
+    <a routerLink="/" class="brand">
+      <img src="../../../assets/images/miner.jpg">
+      <label>Icanmining</label>
+    </a>
+    <button type="button" mat-button>
+      СКАЧАТЬ МАЙНЕР
+    </button>
+  </div>
+  <nav>
     <div class="menu">
       <div class="menu__item">
         <button type="button" mat-button
@@ -46,11 +46,17 @@
           About
         </button>
       </div>
-      <div class="menu__item">
-        <button type="button" mat-button appSignIn *ngIf="!authService.isAuthorized()">Sign In</button>
-        <button type="button" mat-button appSignUp *ngIf="!authService.isAuthorized()">Sign Up</button>
-        <button type="button" mat-button *ngIf="authService.isAuthorized()" (click)="signOut()">Sign Out</button>
-      </div>
     </div>
   </nav>
+  <div class="user">
+    <div class="user__welcome" *ngIf="authService.isAuthorized()">
+      Welcome, <span class="user__username">{{authService.user.username}}!</span>
+    </div>
+    <div class="user__auth">
+      <button type="button" mat-button appSignIn *ngIf="!authService.isAuthorized()">Sign In</button>
+      <span class="sign-out-icon" *ngIf="authService.isAuthorized()" (click)="signOut()">
+        <i class="material-icons">arrow_forward</i>
+      </span>
+    </div>
+  </div>
 </header>

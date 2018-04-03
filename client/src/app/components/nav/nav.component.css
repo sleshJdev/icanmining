@@ -1,41 +1,22 @@
 header {
-  margin-bottom: 2em;
+  display: flex;
+  justify-content: space-between;
+  margin: 1em 4em;
 }
 
-.nav {
-  margin: 1em 5em;
+.logo-miner {
+  display: flex;
 }
 
-.nav .brand {
-  display: inline-block;
-  float: left;
+.brand {
+  display: flex;
   line-height: 36px;
   padding-right: 0.5em;
-  border-bottom-right-radius: 1em;
-  border-top-right-radius: 1em;
-  background-color: blue;
-}
-
-.brand a {
-  text-transform: uppercase;
-  color: gold;
 }
 
 .brand img {
   height: 36px;
   margin-right: 0.3em;
-  float: left;
-}
-
-.nav .user {
-  font-weight: bold;
-  margin-left: 1em;
-  height: 36px;
-  vertical-align: middle;
-  float: left;
-  line-height: 36px;
-  border-left: 1px solid;
-  padding-left: 1em;
 }
 
 .menu {
@@ -56,4 +37,27 @@ header {
 
 .active {
   background-color: #e0e0e0;
+}
+
+.user {
+  display: flex;
+}
+
+.user__welcome {
+  height: 48px;
+  vertical-align: middle;
+  line-height: 48px;
+  border-right: 1px solid;
+  padding-right: 1em;
+  margin-right: 1em;
+}
+
+.user__username {
+  font-weight: bold;
+}
+
+.sign-out-icon {
+  display: inline-block;
+  margin-top: 12px;
+  cursor: pointer;
 }
