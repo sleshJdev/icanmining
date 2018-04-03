@@ -15,7 +15,7 @@ services:
       context: .
       args:
         - app_file
-        - profile
+        - app_profile
     container_name: icanmining-app
     depends_on:
       - db
