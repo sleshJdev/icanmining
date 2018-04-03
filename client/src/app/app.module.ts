@@ -18,8 +18,8 @@ import {UsersComponent} from './components/users/users.component';
 import {WalletComponent} from './components/wallet/wallet.component';
 import {DownloadComponent} from './components/download/download.component';
 import {HomeModule} from "./components/home/home.module";
-import {SignInButtonComponent} from "./components/sign-in/sign-in-button.component";
-import {SignUpButtonComponent} from "./components/sign-up/sign-up-button.component";
+import {SignInDirective} from './components/sign-in/sign-in.directive';
+import {SignUpDirective} from './components/sign-up/sign-up.directive';
 
 
 @NgModule({
@@ -33,8 +33,8 @@ import {SignUpButtonComponent} from "./components/sign-up/sign-up-button.compone
     UsersComponent,
     WalletComponent,
     DownloadComponent,
-    SignInButtonComponent,
-    SignUpButtonComponent
+    SignInDirective,
+    SignUpDirective
   ],
   imports: [
     BrowserModule,
