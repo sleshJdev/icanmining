@@ -47,20 +47,9 @@
         </button>
       </div>
       <div class="menu__item">
-        <button type="button" mat-raised-button color="primary"
-                *ngIf="!authService.isAuthorized()"
-                routerLink="/sign-in">Sign In
-        </button>
-        <button type="button" mat-raised-button color="accent"
-                *ngIf="!authService.isAuthorized()"
-                routerLink="/sign-up">Sign Up
-        </button>
-        <div>
-          <button type="button" mat-raised-button color="warn"
-                  *ngIf="authService.isAuthorized()"
-                  (click)="signOut()">Sign Out
-          </button>
-        </div>
+        <app-sign-in-button [visible]="!authService.isAuthorized()"></app-sign-in-button>
+        <app-sign-up-button [visible]="!authService.isAuthorized()"></app-sign-up-button>
+        <button type="button" mat-button *ngIf="authService.isAuthorized()" (click)="signOut()">Sign Out</button>
       </div>
     </div>
   </nav>

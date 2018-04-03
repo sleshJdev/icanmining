@@ -30,7 +30,7 @@ import {Component} from "@angular/core";
           вы в этот момент зарабатываете !
         </em>
       </p>
-      <button class="button">
+      <button type="button" mat-button>
         Начать Зарабатывать
       </button>
     </section>`

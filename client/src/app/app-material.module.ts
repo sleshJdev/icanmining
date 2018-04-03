@@ -15,46 +15,33 @@ import {
   MatToolbarModule,
   MatPaginatorModule,
   MatIconModule,
-  MatSortModule
+  MatSortModule, MatStepperModule
 } from '@angular/material';
 
+
+const modules = [
+  MatButtonModule,
+  MatSelectModule,
+  MatOptionModule,
+  MatCheckboxModule,
+  MatRadioModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatCardModule,
+  MatTabsModule,
+  MatTableModule,
+  MatButtonToggleModule,
+  MatToolbarModule,
+  MatDialogModule,
+  MatPaginatorModule,
+  MatIconModule,
+  MatSortModule,
+  MatStepperModule
+];
+
 @NgModule({
-  imports: [
-    MatButtonModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatCheckboxModule,
-    MatRadioModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatTabsModule,
-    MatTableModule,
-    MatButtonToggleModule,
-    MatToolbarModule,
-    MatDialogModule,
-    MatPaginatorModule,
-    MatIconModule,
-    MatSortModule
-  ],
-  exports: [
-    MatButtonModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatCheckboxModule,
-    MatRadioModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatTabsModule,
-    MatTableModule,
-    MatButtonToggleModule,
-    MatToolbarModule,
-    MatDialogModule,
-    MatPaginatorModule,
-    MatIconModule,
-    MatSortModule
-  ]
+  imports: modules,
+  exports: modules
 })
 export class AppMaterialModule {
 }

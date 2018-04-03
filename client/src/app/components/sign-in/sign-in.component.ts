@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {Router} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -11,22 +11,30 @@ import {InfoModalComponent} from '../../common/modal/info-modal/info-modal.compo
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css']
 })
-export class SignInComponent {
+export class SignInComponent implements OnInit {
 
   options: FormGroup;
 
-  constructor(public authService: AuthService,
-              public router: Router,
-              public dialog: MatDialog,
-              public formBuilder: FormBuilder) {
-    this.options = formBuilder.group({
+  constructor(private authService: AuthService,
+              private router: Router,
+              private dialog: MatDialog,
+              private formBuilder: FormBuilder) {
+  }
+
+  ngOnInit(): void {
+    this.options = this.formBuilder.group({
       username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required])
+      password: new FormControl('', [Validators.required]),
+      rememberme: new FormControl(true)
     });
   }
 
   signIn() {
-    this.authService.signIn(this.options.value).subscribe(
+    //TODO: implement rememberme
+    this.authService.signIn({
+      username: this.options.value.username,
+      password: this.options.value.password
+    }).subscribe(
       () => this.router.navigateByUrl('/'),
       () => this.showError());
   }

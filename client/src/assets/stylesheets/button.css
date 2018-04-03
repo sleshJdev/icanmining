@@ -1,6 +1,10 @@
 @import "./color.css";
 
-.button {
+button.mat-button {
+  background-color: var(--color-white);
+}
+
+button.mat-button {
   border: 1px solid var(--color-primary-light);
   height: 48px;
   border-radius: 24px;
@@ -9,6 +13,6 @@
   text-transform: uppercase;
 }
 
-.button:hover {
+button.mat-button:hover {
   cursor: pointer;
 }

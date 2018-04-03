@@ -1,17 +1,30 @@
-<form class="form" [formGroup]="options" (onsubmit)="signIn()">
-  <div class="form__row">
-    <input id="username" name="username" formControlName="username" placeholder="Username">
-    <label for="username" *ngIf="options.controls.username.hasError('required')">
-      Username is <strong>required</strong>
-    </label>
+<div class="form-wrapper">
+  <div class="text--right">
+    <button mat-icon-button mat-dialog-close>X</button>
   </div>
-  <div class="form__row">
-    <input id="password" type="password" name="password" formControlName="password" placeholder="Password">
-    <label for="password" *ngIf="options.controls.password.hasError('required')">
-      Password is <strong>required</strong>
-    </label>
+  <div class="logo">
+    <img src="../../../assets/images/miner.jpg">
   </div>
-  <div class="form__row">
-    <button type="submit" [disabled]="!options.valid">Sign In</button>
+  <div class="text--center">
+    <h2>Sign In</h2>
   </div>
-</form>
+  <form class="form" [formGroup]="options">
+    <mat-form-field>
+      <input matInput type="text" name="username" formControlName="username">
+      <mat-placeholder>Username</mat-placeholder>
+      <mat-error *ngIf="options.controls.username.hasError('required')">
+        Username is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" name="password" formControlName="password">
+      <mat-placeholder>Password</mat-placeholder>
+      <mat-error *ngIf="options.controls.password.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-checkbox formControlName="rememberme">Remember Me</mat-checkbox>
+    <button mat-button mat-dialog-close type="submit" class="buffer-top"
+            [disabled]="!options.valid" (click)="signIn()">Sign In</button>
+  </form>
+</div>

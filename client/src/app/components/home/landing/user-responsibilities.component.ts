@@ -28,7 +28,7 @@ import {Component} from "@angular/core";
         <p class="text--more">Что остается делать Вам?</p>
         <p class="text--less">Прочитать правила, установить программу и заниматься своими делами. Иногда наблюдать, за
           счетчиком монитора за вашими деньгами.</p>
-        <button class="button">Установить майнер</button>
+        <button type="button" mat-button>Установить майнер</button>
       </div>
       <picture>
         <img src="../../../../assets/images/miner.jpg">

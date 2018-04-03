@@ -9,13 +9,12 @@ import {Router} from '@angular/router';
 })
 export class NavComponent {
 
-  constructor(public router: Router,
-              public authService: AuthService) {
+  constructor(private router: Router,
+              private authService: AuthService) {
   }
 
   signOut() {
     this.authService.signOut();
     this.router.navigateByUrl('/sign-in');
   }
-
 }

@@ -8,15 +8,18 @@ import {BenefitsComponent} from "./landing/benefits.component";
 import {IcanminingComponent} from "./landing/icanmining.component";
 import {ProfitComponent} from "./landing/profit.component";
 import {UserResponsibilitiesComponent} from "./landing/user-responsibilities.component";
+import {MatButtonModule} from "@angular/material";
 
 @NgModule({
   declarations: [
     HomeComponent, IntoComponent,
     BenefitsComponent, IcanminingComponent,
     ProfitComponent, UserResponsibilitiesComponent,
-    FooterComponent, SupportComponent,],
+    FooterComponent, SupportComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatButtonModule
   ]
 })
 export class HomeModule {

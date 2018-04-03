@@ -1,44 +1,31 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
 import {AuthService} from '../../common/auth.service';
-import {InfoModalComponent} from '../../common/modal/info-modal/info-modal.component';
-import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnInit {
+  userOptions: FormGroup;
+  cardOptions: FormGroup;
 
-  options: FormGroup;
+  constructor(private authService: AuthService,
+              private formBuilder: FormBuilder) {
+  }
 
-  constructor(public authService: AuthService,
-              public dialog: MatDialog,
-              public router: Router,
-              public formBuilder: FormBuilder) {
-    this.options = formBuilder.group({
+  ngOnInit(): void {
+    this.userOptions = this.formBuilder.group({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
     });
-  }
-
-  signUp() {
-    this.authService.signUp(this.options.value)
-      .switchMap(() => {
-        return this.dialog.open(InfoModalComponent, {
-          width: '300px',
-          data: {
-            title: 'Registration',
-            message: `Congrats, ${this.options.value.username} !
-            Your account was created successfully!
-            Please, following to the login page and try login
-            to download our miner. `
-          }
-        }).afterClosed();
-      }).subscribe(() => {
-      this.router.navigateByUrl('/sign-in');
+    this.cardOptions = this.formBuilder.group({
+      name: new FormControl('', [Validators.required]),
+      cardNumber: new FormControl('', [Validators.required]),
+      expirationDate: new FormControl('', [Validators.required]),
+      cvv: new FormControl('', [Validators.required]),
+      address: new FormControl('', [Validators.required])
     });
   }
 }

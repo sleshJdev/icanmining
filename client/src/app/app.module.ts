@@ -5,7 +5,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppComponent} from './app.component';
 import {AppMaterialModule} from './app-material.module';
 import {AppRoutesModule} from './app-routes.module';
-import {HomeComponent} from './components/home/home.component';
 import {SignInComponent} from './components/sign-in/sign-in.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NavComponent} from './components/nav/nav.component';
@@ -18,10 +17,9 @@ import {InfoModalComponent} from './common/modal/info-modal/info-modal.component
 import {UsersComponent} from './components/users/users.component';
 import {WalletComponent} from './components/wallet/wallet.component';
 import {DownloadComponent} from './components/download/download.component';
-import {FooterComponent} from './components/home/footer/footer.component';
-import {SupportComponent} from './components/home/support/support.component';
-import {CommonModule} from "@angular/common";
 import {HomeModule} from "./components/home/home.module";
+import {SignInButtonComponent} from "./components/sign-in/sign-in-button.component";
+import {SignUpButtonComponent} from "./components/sign-up/sign-up-button.component";
 
 
 @NgModule({
@@ -35,6 +33,8 @@ import {HomeModule} from "./components/home/home.module";
     UsersComponent,
     WalletComponent,
     DownloadComponent,
+    SignInButtonComponent,
+    SignUpButtonComponent
   ],
   imports: [
     BrowserModule,

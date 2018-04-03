@@ -1,12 +1,20 @@
-.form-container {
-  padding-right: 15em;
+.form-wrapper {
+  padding: 1em 1.5em;
 }
 
-.mat-toolbar {
-  background-color: transparent;
+.logo {
+  text-align: center;
 }
 
-.mat-toolbar-row {
-  justify-content: flex-end;
-  padding-right: 0;
+.logo img {
+  width: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.buffer-top {
+  margin-top: 1em;
 }
