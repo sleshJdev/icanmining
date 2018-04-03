@@ -41,8 +41,18 @@ task buildClient() {
         exec {
             workingDir './client'
             executable 'yarn'
+            args 'install'
+        }
+        exec {
+            workingDir './client'
+            executable 'yarn'
             args 'run', 'build'
         }
+    }
+}
+
+task copyClient(dependsOn: buildClient) {
+    doLast {
         delete './src/main/webapp'
         copy {
             from './client/dist'
@@ -51,7 +61,7 @@ task buildClient() {
     }
 }
 
-tasks.war.dependsOn buildClient
+tasks.war.dependsOn copyClient
 
 task dockerBuild(type: Exec, dependsOn: war) {
     def appFile = rootDir.toURI().relativize(war.archivePath.toURI())
