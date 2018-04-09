@@ -51,7 +51,7 @@ task buildClient() {
     }
 }
 
-tasks.war.dependsOn buildClient
+//tasks.war.dependsOn buildClient
 
 task dockerBuild(type: Exec, dependsOn: war) {
     def appFile = rootDir.toURI().relativize(war.archivePath.toURI())

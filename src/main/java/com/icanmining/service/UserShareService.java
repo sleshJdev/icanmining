@@ -32,7 +32,7 @@ public class UserShareService {
     public void contribute(ApplicationUserDto userDto, UserShareRequest shareRequest) {
         ApplicationUser user = applicationUserRepository.findOne(userDto.getId());
         BigDecimal miningInterval = shareRequest.getMiningInterval();
-        BigDecimal share = shareRequest.getShare();
+        BigDecimal share = shareRequest.getProfit();
         BigDecimal delta = share.multiply(miningInterval).divide(DAY_SECONDS, 15, RoundingMode.HALF_DOWN);
         userShareRepository.save(new UserShare(user, delta, utcNowDateTime()));
     }

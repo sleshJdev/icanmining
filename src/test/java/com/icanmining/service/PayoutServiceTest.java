@@ -93,9 +93,9 @@ public class PayoutServiceTest extends AbstractServiceTest {
         Map<Long, UserProfitItem> userProfitItemsBeforePayout = userShareService.calculateProfits()
                 .stream().collect(toMap(UserProfitItem::getId, Function.identity()));
         assertThat(userProfitItemsBeforePayout.entrySet(), hasSize(3));
-        BigDecimal profit1 = WALLET_BALANCE.multiply(userShare1.getShare());
-        BigDecimal profit2 = WALLET_BALANCE.multiply(userShare2.getShare());
-        BigDecimal profit3 = WALLET_BALANCE.multiply(userShare3.getShare());
+        BigDecimal profit1 = WALLET_BALANCE.multiply(userShare1.getProfit());
+        BigDecimal profit2 = WALLET_BALANCE.multiply(userShare2.getProfit());
+        BigDecimal profit3 = WALLET_BALANCE.multiply(userShare3.getProfit());
         assertThat(userProfitItemsBeforePayout.get(user1.getId()).getProfit(), comparesEqualTo(profit1));
         assertThat(userProfitItemsBeforePayout.get(user2.getId()).getProfit(), comparesEqualTo(profit2));
         assertThat(userProfitItemsBeforePayout.get(user3.getId()).getProfit(), comparesEqualTo(profit3));

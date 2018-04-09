@@ -23,7 +23,10 @@ public class WalletController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public WalletDto getWalletDetails() {
-        return walletService.findWallet();
+    public WalletAddressDto getWalletDetails() {
+        WalletDto wallet = walletService.findWallet();
+        return new WalletAddressDto(wallet.getAddress());
     }
+
+
 }
