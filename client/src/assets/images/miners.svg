@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="474" height="354" viewBox="0 0 474 354">
+    <defs>
+        <path id="b" d="M0 0h296v264H0z"/>
+        <filter id="a" width="128%" height="131.4%" x="-16.4%" y="-12.7%" filterUnits="objectBoundingBox">
+            <feOffset dx="-7" dy="8" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="12.5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"/>
+        </filter>
+        <linearGradient id="c" x1="-34.021%" y1="0%" y2="65.757%">
+            <stop offset="0%" stop-color="#6BD0F4"/>
+            <stop offset="100%" stop-color="#83F1C0"/>
+        </linearGradient>
+        <path id="e" d="M0 0h296v264H0z"/>
+        <filter id="d" width="128%" height="131.4%" x="-16.4%" y="-12.7%" filterUnits="objectBoundingBox">
+            <feOffset dx="-7" dy="8" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="12.5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g opacity=".5">
+            <g transform="translate(32 17)">
+                <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+                <use fill="#FFF" xlink:href="#b"/>
+            </g>
+            <text fill="#B4B9C8" font-family="OpenSans-SemiBold, Open Sans" font-size="10" font-weight="500" transform="translate(32 17)">
+                <tspan x="16" y="216">USD/Day</tspan>
+            </text>
+            <text fill="#2E3854" font-family="OpenSans-Regular, Open Sans" font-size="14" transform="translate(32 17)">
+                <tspan x="16" y="240">$18</tspan>
+            </text>
+            <text fill="#B4B9C8" font-family="OpenSans-SemiBold, Open Sans" font-size="10" font-weight="500" transform="translate(32 17)">
+                <tspan x="104" y="216">Balance</tspan>
+            </text>
+            <text fill="#2E3854" font-family="OpenSans-Regular, Open Sans" font-size="14" transform="translate(32 17)">
+                <tspan x="104" y="240">0.58756mBTC</tspan>
+            </text>
+            <text fill="#B4B9C8" font-family="OpenSans-SemiBold, Open Sans" font-size="10" font-weight="500" transform="translate(32 17)">
+                <tspan x="239" y="216">mBTC</tspan>
+            </text>
+            <text fill="#2E3854" font-family="OpenSans-Regular, Open Sans" font-size="14" transform="translate(32 17)">
+                <tspan x="239" y="240">$5.77</tspan>
+            </text>
+            <path stroke="#DBDFE9" d="M112.5 258.1V225M248.5 258.1V225"/>
+            <g fill="#B4B9C8">
+                <text font-family="OpenSans-Bold, Open Sans" font-size="10" font-weight="bold" transform="translate(48 150)">
+                    <tspan x="0" y="11">Device:</tspan> <tspan x="35.952" y="11" font-family="OpenSans-Regular, Open Sans" font-weight="normal"> </tspan>
+                </text>
+                <text font-family="OpenSans-Regular, Open Sans" font-size="12" transform="translate(48 150)">
+                    <tspan x="0" y="35">GPU#1 Gigabyte GeForce GTX 1080</tspan> <tspan x="0" y="51">CPU#1 Intel(R Core(TM) i7-7700 CPU @3.60GHz </tspan>
+                </text>
+            </g>
+            <text fill="#2E3854" font-family="OpenSans-Regular, Open Sans" font-size="16" transform="translate(48 30)">
+                <tspan x="0" y="17">ICAN MINING</tspan>
+            </text>
+            <path stroke="#445894" d="M302 41.5h10.76"/>
+            <g transform="translate(48 76)">
+                <rect width="132" height="53" fill="url(#c)" rx="26.5"/>
+                <text fill="#2E3854" font-family="OpenSans-Light, Open Sans" font-size="21" font-weight="300" letter-spacing="2.1" transform="translate(4 11)">
+                    <tspan x="34.122" y="23">STOP</tspan>
+                </text>
+            </g>
+            <g fill="url(#c)" transform="translate(196 103)">
+                <path d="M0 20.833h2.842V25H0zM5.684 17.755h2.842V25H5.684zM11.368 15.763h2.843V25h-2.843zM17.053 14.286h2.842V25h-2.842zM22.737 11.905h2.842V25h-2.842zM28.421 16.667h2.842V25h-2.842zM34.105 12.723h2.842V25h-2.842zM39.79 14.881h2.842V25h-2.843zM45.474 9.988h2.842V25h-2.842zM51.158 6.915H54V25h-2.842zM57 9.909h2.842V25H57zM62.684 13.095h2.842V25h-2.842zM68.368 10.714h2.842V25h-2.842zM74.053 9.448h2.842V25h-2.842zM79.737 9.981h2.842V25h-2.842zM85.421 6.929h2.842V25h-2.842zM91.105 3.067h2.842V25h-2.842zM96.789 4.762h2.842V25h-2.842zM102.474 0h2.842v25h-2.842zM108.158 4.762H111V25h-2.842z"/>
+            </g>
+            <text fill="#B4B9C8" font-family="OpenSans-Regular, Open Sans" font-size="12" letter-spacing=".857" transform="translate(194 76)">
+                <tspan x="0" y="13">- BENCHMAR</tspan> <tspan x="81.316" y="13" letter-spacing=".735">K</tspan>
+            </text>
+        </g>
+        <g transform="translate(160 57)">
+            <use fill="#000" filter="url(#d)" xlink:href="#e"/>
+            <use fill="#FFF" xlink:href="#e"/>
+        </g>
+        <text fill="#B4B9C8" font-family="OpenSans-SemiBold, Open Sans" font-size="10" font-weight="500" transform="translate(160 57)">
+            <tspan x="16" y="216">USD/Day</tspan>
+        </text>
+        <text fill="#2E3854" font-family="OpenSans-Regular, Open Sans" font-size="14" transform="translate(160 57)">
+            <tspan x="16" y="240">$18</tspan>
+        </text>
+        <text fill="#B4B9C8" font-family="OpenSans-SemiBold, Open Sans" font-size="10" font-weight="500" transform="translate(160 57)">
+            <tspan x="104" y="216">Balance</tspan>
+        </text>
+        <text fill="#2E3854" font-family="OpenSans-Regular, Open Sans" font-size="14" transform="translate(160 57)">
+            <tspan x="104" y="240">0.58756mBTC</tspan>
+        </text>
+        <text fill="#B4B9C8" font-family="OpenSans-SemiBold, Open Sans" font-size="10" font-weight="500" transform="translate(160 57)">
+            <tspan x="239" y="216">mBTC</tspan>
+        </text>
+        <text fill="#2E3854" font-family="OpenSans-Regular, Open Sans" font-size="14" transform="translate(160 57)">
+            <tspan x="239" y="240">$5.77</tspan>
+        </text>
+        <path stroke="#DBDFE9" d="M240.5 298.1V265M376.5 298.1V265"/>
+        <g fill="#B4B9C8">
+            <text font-family="OpenSans-Bold, Open Sans" font-size="10" font-weight="bold" transform="translate(176 190)">
+                <tspan x="0" y="11">Device:</tspan> <tspan x="35.952" y="11" font-family="OpenSans-Regular, Open Sans" font-weight="normal"> </tspan>
+            </text>
+            <text font-family="OpenSans-Regular, Open Sans" font-size="12" transform="translate(176 190)">
+                <tspan x="0" y="35">GPU#1 Gigabyte GeForce GTX 1080</tspan> <tspan x="0" y="51">CPU#1 Intel(R Core(TM) i7-7700 CPU @3.60GHz </tspan>
+            </text>
+        </g>
+        <text fill="#2E3854" font-family="OpenSans-Regular, Open Sans" font-size="16" transform="translate(176 70)">
+            <tspan x="0" y="17">ICAN MINING</tspan>
+        </text>
+        <path stroke="#445894" d="M430 81.5h10.76"/>
+        <g transform="translate(176 116)">
+            <rect width="131" height="52" x=".5" y=".5" stroke="#27EBAC" rx="26"/>
+            <text fill="#2E3854" font-family="OpenSans-Light, Open Sans" font-size="21" font-weight="300" letter-spacing="2.1" transform="translate(4 11)">
+                <tspan x="29.719" y="23">START</tspan>
+            </text>
+        </g>
+        <text fill="#B4B9C8" font-family="OpenSans-Regular, Open Sans" font-size="12" letter-spacing=".857" transform="translate(322 116)">
+            <tspan x="0" y="13">- BENCHMAR</tspan> <tspan x="81.316" y="13" letter-spacing=".735">K</tspan>
+        </text>
+        <g fill="#B4B9C8">
+            <path d="M324 163.833h2.842V168H324zM329.684 160.755h2.842V168h-2.842zM335.368 158.763h2.843V168h-2.843zM341.053 157.286h2.842V168h-2.842zM346.737 154.905h2.842V168h-2.842zM352.421 159.667h2.842V168h-2.842zM358.105 155.723h2.842V168h-2.842zM363.79 157.881h2.842V168h-2.843zM369.474 152.988h2.842V168h-2.842zM375.158 149.915H378V168h-2.842zM381 152.909h2.842V168H381zM386.684 156.095h2.842V168h-2.842zM392.368 153.714h2.842V168h-2.842zM398.053 152.448h2.842V168h-2.842zM403.737 152.981h2.842V168h-2.842zM409.421 149.929h2.842V168h-2.842zM415.105 146.067h2.842V168h-2.842zM420.789 147.762h2.842V168h-2.842zM426.474 143h2.842v25h-2.842zM432.158 147.762H435V168h-2.842z"/>
+        </g>
+    </g>
+</svg>

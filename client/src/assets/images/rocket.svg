@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
+    <defs>
+        <path id="a" d="M0 0h128v128H0z"/>
+        <linearGradient id="c" x1="-34.021%" y1="0%" y2="65.757%">
+            <stop offset="0%" stop-color="#6BD0F4"/>
+            <stop offset="100%" stop-color="#83F1C0"/>
+        </linearGradient>
+        <path id="d" d="M.04.632h9.512V51H.04z"/>
+        <linearGradient id="e" x1="-7.295%" y1="0%" y2="107.044%">
+            <stop offset="0%" stop-color="#8478BD"/>
+            <stop offset="100%" stop-color="#526AC5"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <mask id="b" fill="#fff">
+            <use xlink:href="#a"/>
+        </mask>
+        <g mask="url(#b)">
+            <path fill="url(#c)" d="M59.176 62.432v-15.01c0-19.393-8.99-37.207-23.384-46.335-14.393 9.128-23.383 26.942-23.383 46.334v15.97h.005v7.115c0 18.171 6.782 35.557 6.782 35.557H52.4s6.78-19.177 6.78-35.557v-8.074h-.004z" transform="translate(28 8)"/>
+            <g transform="translate(59 70.758)">
+                <mask id="f" fill="#fff">
+                    <use xlink:href="#d"/>
+                </mask>
+                <path fill="url(#e)" d="M4.798.632l-.255.224C-.243 5.504-.174 10.464.188 13.678L4.798 51l4.608-37.323c.363-3.213.413-7.949-4.353-12.82L4.798.631z" mask="url(#f)"/>
+            </g>
+            <path fill="url(#e)" d="M11.3 7.73C9.175 2.19 7.48.867 7.18.667v7.082C7.18 24.128.4 43.306.4 43.306L19.586 51S18.242 25.817 11.3 7.73" transform="translate(80 70.758)"/>
+            <path fill="url(#e)" d="M8.286 7.73c2.126-5.54 3.82-6.864 4.12-7.064v7.082c0 16.38 6.78 35.558 6.78 35.558L0 51S1.343 25.817 8.286 7.73" transform="translate(28 70.758)"/>
+            <path fill="#6E78B4" d="M74.77 47.487c0 6.06-4.913 10.973-10.974 10.973-6.059 0-10.972-4.913-10.972-10.973 0-6.06 4.913-10.973 10.972-10.973 6.061 0 10.973 4.913 10.973 10.973"/>
+            <path fill="url(#e)" d="M35.788 0a2.282 2.282 0 0 0-2.282 2.283v.361h4.564v-.36A2.282 2.282 0 0 0 35.788 0" transform="translate(28 8)"/>
+        </g>
+    </g>
+</svg>

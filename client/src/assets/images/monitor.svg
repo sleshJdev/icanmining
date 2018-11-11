@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
+    <defs>
+        <path id="a" d="M0 0h128v128H0z"/>
+        <path id="c" d="M0 .557h111.996v85.879H0z"/>
+        <linearGradient id="d" x1="-34.021%" y1="0%" y2="65.757%">
+            <stop offset="0%" stop-color="#6BD0F4"/>
+            <stop offset="100%" stop-color="#83F1C0"/>
+        </linearGradient>
+        <linearGradient id="f" x1="-7.295%" y1="0%" y2="107.044%">
+            <stop offset="0%" stop-color="#8478BD"/>
+            <stop offset="100%" stop-color="#526AC5"/>
+        </linearGradient>
+        <path id="g" d="M.758.334h58.48V8H.757z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <mask id="b" fill="#fff">
+            <use xlink:href="#a"/>
+        </mask>
+        <g mask="url(#b)">
+            <g transform="translate(8 15.443)">
+                <mask id="e" fill="#fff">
+                    <use xlink:href="#c"/>
+                </mask>
+                <path fill="url(#d)" d="M105.334 86.436H6.662A6.662 6.662 0 0 1 0 79.772V7.22A6.661 6.661 0 0 1 6.662.557h98.672a6.661 6.661 0 0 1 6.662 6.662v72.553a6.662 6.662 0 0 1-6.662 6.663" mask="url(#e)"/>
+            </g>
+            <path fill="url(#f)" d="M101.106 75.079H10.89a3.197 3.197 0 0 1-3.197-3.197V11.195a3.198 3.198 0 0 1 3.197-3.198h90.215a3.197 3.197 0 0 1 3.197 3.198v60.687a3.197 3.197 0 0 1-3.197 3.197M71.938 86.879l1.06 8.978h-34l1.43-8.978z" transform="translate(8 15)"/>
+            <g transform="translate(34 107.443)">
+                <mask id="h" fill="#fff">
+                    <use xlink:href="#g"/>
+                </mask>
+                <path fill="url(#d)" d="M51.57.334H8.425A7.667 7.667 0 0 0 .758 8h58.48A7.667 7.667 0 0 0 51.57.334" mask="url(#h)"/>
+            </g>
+            <path fill="url(#d)" d="M72.411 42.69c0 9.063-7.349 16.412-16.413 16.412-9.065 0-16.413-7.349-16.413-16.413s7.348-16.413 16.413-16.413c9.064 0 16.413 7.35 16.413 16.413" transform="translate(8 15)"/>
+            <path fill="url(#f)" d="M55.998 51.407L45.483 40.892l3.536-3.535c3.854 3.854 10.104 3.854 13.958 0l3.536 3.535-10.515 10.515z" transform="translate(8 15)"/>
+        </g>
+    </g>
+</svg>
