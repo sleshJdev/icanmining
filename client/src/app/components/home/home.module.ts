@@ -9,12 +9,14 @@ import {IcanminingComponent} from "./landing/icanmining.component";
 import {ProfitComponent} from "./landing/profit.component";
 import {UserResponsibilitiesComponent} from "./landing/user-responsibilities.component";
 import {MatButtonModule} from "@angular/material";
+import {CloudMiningComponent} from "./landing/cloud-mining.component";
 
 @NgModule({
   declarations: [
     HomeComponent, IntoComponent,
     BenefitsComponent, IcanminingComponent,
     ProfitComponent, UserResponsibilitiesComponent,
+    CloudMiningComponent,
     FooterComponent, SupportComponent
   ],
   imports: [

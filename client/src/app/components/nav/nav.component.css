@@ -1,7 +1,9 @@
 header {
   display: flex;
   justify-content: space-between;
-  margin: 1em 4em;
+  margin-top: 53px;
+  margin-bottom: 59px;
+  padding: 0 144px;
 }
 
 .logo-miner {
@@ -9,14 +11,14 @@ header {
 }
 
 .brand {
-  display: flex;
-  line-height: 36px;
-  padding-right: 0.5em;
+  display: block;
+  width: 192px;
+  height: 48px;
+  margin-right: 28px;
 }
 
 .brand img {
-  height: 36px;
-  margin-right: 0.3em;
+  object-fit: contain;
 }
 
 .menu {

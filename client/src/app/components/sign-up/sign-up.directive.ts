@@ -14,8 +14,10 @@ export class SignUpDirective {
     this.dialog.closeAll();
     this.dialog.open(
       SignUpComponent,
-      {backdropClass: 'app-backdrop'}
-    );
+      {
+        backdropClass: 'app-backdrop',
+        panelClass: 'app-panel'
+      });
   }
 
 }

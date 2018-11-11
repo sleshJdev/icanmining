@@ -13,6 +13,11 @@ button.mat-button {
   text-transform: uppercase;
 }
 
+button.mat-icon-button .mat-button-focus-overlay {
+  background: transparent;
+}
+
+
 button.mat-button:hover {
   cursor: pointer;
 }

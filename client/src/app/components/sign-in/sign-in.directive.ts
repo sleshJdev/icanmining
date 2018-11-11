@@ -14,7 +14,10 @@ export class SignInDirective {
     this.dialog.closeAll();
     this.dialog.open(
       SignInComponent,
-      {backdropClass: 'app-backdrop'});
+      {
+        backdropClass: 'app-backdrop',
+        panelClass: 'app-panel'
+      });
   }
 
 }

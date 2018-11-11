@@ -1,86 +1,85 @@
-<div class="form-wrapper">
-  <div class="text--right">
-    <button mat-icon-button mat-dialog-close>X</button>
-  </div>
-  <div class="logo">
-    <img src="../../../assets/images/miner.jpg">
-  </div>
-  <div class="text--center">
-    <h2>Sign Up</h2>
-  </div>
-  <mat-horizontal-stepper [linear]="true">
-    <ng-template matStepperIcon="edit">
-      <mat-icon>check</mat-icon>
-    </ng-template>
-    <mat-step [stepControl]="userOptions">
-      <form class="form" [formGroup]="userOptions">
-        <ng-template matStepLabel>User</ng-template>
-        <mat-form-field>
-          <input matInput name="username" formControlName="username">
-          <mat-placeholder>Username</mat-placeholder>
-          <mat-error *ngIf="userOptions.controls.username.hasError('required')">
-            Username is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput type="password" name="password" formControlName="password">
-          <mat-placeholder>Password</mat-placeholder>
-          <mat-error *ngIf="userOptions.controls.password.hasError('required')">
-            Password is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-        <button mat-button matStepperNext type="button" class="buffer-top"
-                [disabled]="userOptions.invalid">Next</button>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="cardOptions">
-      <form class="form" [formGroup]="cardOptions">
-        <ng-template matStepLabel>Card</ng-template>
-        <mat-form-field>
-          <input matInput type="text" name="name" formGroupName="name">
-          <mat-placeholder>Name</mat-placeholder>
-          <mat-error *ngIf="cardOptions.controls.name.hasError('required')">
-            Name is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput type="text" name="card-number" formGroupName="cardNumber">
-          <mat-placeholder>Card Number</mat-placeholder>
-          <mat-error *ngIf="cardOptions.controls.cardNumber.hasError('required')">
-            Card Number is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-        <div class="row">
-          <mat-form-field>
-            <input matInput type="text" name="expiration-date" formGroupName="expirationDate">
-            <mat-placeholder>MM/YY</mat-placeholder>
-            <mat-error *ngIf="cardOptions.controls.expirationDate.hasError('required')">
-              Expiration Date is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput type="text" name="cvv" formGroupName="cvv">
-            <mat-placeholder>CVV</mat-placeholder>
-            <mat-error *ngIf="cardOptions.controls.cvv.hasError('required')">
-              CVV code is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <mat-form-field>
-          <input matInput type="text" name="address" formGroupName="address">
-          <mat-placeholder>Address</mat-placeholder>
-          <mat-error *ngIf="cardOptions.controls.address.hasError('required')">
-            Address is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-        <button mat-button type="button" matStepperPrevious>Back</button>
-        <button mat-button mat-dialog-close type="button" class="buffer-top"
-                [disabled]="cardOptions.invalid">Sign Up</button>
-      </form>
-    </mat-step>
-  </mat-horizontal-stepper>
-  <p class="text--center">
-    Already have an account? <span class="anchor" appSignIn>Sign In!</span>
-  </p>
+<div class="close">
+  <button mat-icon-button mat-dialog-close>close X</button>
 </div>
+<div class="logo">
+  <img src="../../../assets/images/logo-icon.svg">
+</div>
+<div class="header">Welcome</div>
+<div class="step-header">
+  Step 1 - Log in information
+</div>
+<mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
+  <ng-template matStepperIcon="edit">
+    <mat-icon>check</mat-icon>
+  </ng-template>
+  <mat-step [stepControl]="userOptions">
+    <form class="form" [formGroup]="userOptions">
+      <ng-template matStepLabel>User</ng-template>
+      <mat-form-field>
+        <input matInput name="username" formControlName="username">
+        <mat-placeholder>Username</mat-placeholder>
+        <mat-error *ngIf="userOptions.controls.username.hasError('required')">
+          Username is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" name="password" formControlName="password">
+        <mat-placeholder>Password</mat-placeholder>
+        <mat-error *ngIf="userOptions.controls.password.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <button mat-button matStepperNext type="button" class="buffer-top"
+              [disabled]="userOptions.invalid">Next</button>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="cardOptions">
+    <form class="form" [formGroup]="cardOptions">
+      <ng-template matStepLabel>Card</ng-template>
+      <mat-form-field>
+        <input matInput type="text" name="name" formControlName="name">
+        <mat-placeholder>Name</mat-placeholder>
+        <mat-error *ngIf="cardOptions.controls.name.hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" name="card-number" formControlName="cardNumber">
+        <mat-placeholder>Card Number</mat-placeholder>
+        <mat-error *ngIf="cardOptions.controls.cardNumber.hasError('required')">
+          Card Number is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <div class="row">
+        <mat-form-field>
+          <input matInput type="text" name="expiration-date" formControlName="expirationDate">
+          <mat-placeholder>MM/YY</mat-placeholder>
+          <mat-error *ngIf="cardOptions.controls.expirationDate.hasError('required')">
+            Expiration Date is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" name="cvv" formControlName="cvv">
+          <mat-placeholder>CVV</mat-placeholder>
+          <mat-error *ngIf="cardOptions.controls.cvv.hasError('required')">
+            CVV code is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <mat-form-field>
+        <input matInput type="text" name="address" formControlName="address">
+        <mat-placeholder>Address</mat-placeholder>
+        <mat-error *ngIf="cardOptions.controls.address.hasError('required')">
+          Address is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <button mat-button type="button" matStepperPrevious>Back</button>
+      <button mat-button mat-dialog-close type="button" class="buffer-top"
+              [disabled]="cardOptions.invalid">Sign Up</button>
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>
+<p class="question">
+  Already have an account? <span class="anchor" appSignIn>Sign In!</span>
+</p>
 

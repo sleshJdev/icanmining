@@ -1,8 +1,7 @@
 <header>
   <div class="logo-miner">
     <a routerLink="/" class="brand">
-      <img src="../../../assets/images/miner.jpg">
-      <label>Icanmining</label>
+      <img src="../../../assets/images/full-logo.svg">
     </a>
     <button type="button" mat-button>
       СКАЧАТЬ МАЙНЕР
@@ -18,32 +17,11 @@
           Home
         </button>
       </div>
-      <div class="menu__item" *ngIf="false">
-        <button type="button"
-                mat-button routerLinkActive="active"
-                routerLink="/settings">
-          Settings
-        </button>
-      </div>
       <div class="menu__item" *ngIf="authService.isAdmin()">
         <button type="button" mat-button
                 routerLinkActive="active"
                 routerLink="/users">
           Users Profit
-        </button>
-      </div>
-      <div class="menu__item">
-        <button type="button" mat-button
-                routerLinkActive="active"
-                routerLink="/contact">
-          Contact
-        </button>
-      </div>
-      <div class="menu__item">
-        <button type="button" mat-button
-                routerLinkActive="active"
-                routerLink="/about">
-          About
         </button>
       </div>
     </div>

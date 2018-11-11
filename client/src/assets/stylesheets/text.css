@@ -28,6 +28,6 @@
 .anchor {
   pointer-events: all;
   cursor: pointer;
-  color: #1a0dab;
+  color: var(--color-primary-light);
   text-decoration: none;
 }

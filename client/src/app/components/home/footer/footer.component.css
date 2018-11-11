@@ -1,27 +1,38 @@
 .footer {
   display: flex;
-}
-
-.brand, .terms {
-  flex-grow: 1;
-  padding: 2em 4em;
+  justify-content: space-between;
+  height: 102px;
+  padding: 26px 144px 0 144px;
 }
 
 .brand {
-  text-align: left;
-  line-height: 4em;
-}
-
-.terms {
-  text-align: right;
+  display: flex;
 }
 
 .logo {
-  width: 2em;
-  height: 2em;
+  width: 56px;
+  display: inline-block;
+}
+
+.logo img {
+  object-fit: contain;
+  width: 100%;
+}
+
+.brand .name {
+  line-height: 43px;
+}
+
+.brand .name span {
+  vertical-align: middle;
+}
+
+.terms {
+  line-height: 43px;
 }
 
 .network {
-  width: 2em;
-  height: 2em;
+  width: 24px;
+  height: 20px;
+  vertical-align: middle;
 }
